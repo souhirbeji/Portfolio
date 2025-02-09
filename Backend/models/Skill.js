@@ -5,16 +5,18 @@ const skillSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    level: {
-        type: Number,
-        required: true,
-        min: 1,
-        max: 5
-    },
     category: {
         type: String,
         required: true,
-        enum: ['frontend', 'backend', 'tools', 'other']
+        enum: ['Frontend', 'Backend', 'Outils']
+    },
+    icon: {
+        type: String,
+        required: true
+    },
+    iconColor: {
+        type: String,
+        default: 'blue-500'
     }
 }, {
     timestamps: true

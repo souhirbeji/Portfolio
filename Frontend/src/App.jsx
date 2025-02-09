@@ -27,6 +27,7 @@ function App() {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/auth" element={<Auth />} />
                 <Route path="/experience" element={<Experience />} />
+                <Route path="/dashboard" element={ <Dashboard />} />
                 <Route
                   path="/dashboard"
                   element={

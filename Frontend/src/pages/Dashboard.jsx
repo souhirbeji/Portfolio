@@ -1,9 +1,14 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import SkillForm from '../components/forms/SkillForm';
+import ProjectForm from '../components/forms/ProjectForm';
+import ExperienceForm from '../components/forms/ExperienceForm';
 
 const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
+  const [activeForm, setActiveForm] = useState(null);
+  const [editItem, setEditItem] = useState(null);
 
   const stats = [
     { title: 'Total Projects', value: '12', trend: '+2', color: 'bg-violet-500' },
@@ -14,6 +19,13 @@ const Dashboard = () => {
   useEffect(() => {
     setTimeout(() => setIsLoading(false), 1000);
   }, []);
+
+  const handleSubmit = async (formData) => {
+    // Implement your API calls here
+    console.log('Form submitted:', formData);
+    setActiveForm(null);
+    setEditItem(null);
+  };
 
   return (
     <div className={`min-h-screen ${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-50'}`}>
@@ -34,6 +46,42 @@ const Dashboard = () => {
 
       {/* Main Content */}
       <main className="p-6">
+        {/* Forms Section */}
+        <div className="mb-8 space-y-4">
+          <div className="flex space-x-4">
+            <button
+              onClick={() => {
+                setActiveForm('skill');
+                setEditItem(null);
+              }}
+              className="px-4 py-2 bg-violet-500 text-white rounded-lg"
+            >
+              Add Skill
+            </button>
+            <button
+              onClick={() => {
+                setActiveForm('project');
+                setEditItem(null);
+              }}
+              className="px-4 py-2 bg-teal-500 text-white rounded-lg"
+            >
+              Add Project
+            </button>
+            <button
+              onClick={() => {
+                setActiveForm('experience');
+                setEditItem(null);
+              }}
+              className="px-4 py-2 bg-amber-500 text-white rounded-lg"
+            >
+              Add Experience
+            </button>
+          </div>
+          {activeForm === 'skill' && <SkillForm onSubmit={handleSubmit} editItem={editItem} />}
+          {activeForm === 'project' && <ProjectForm onSubmit={handleSubmit} editItem={editItem} />}
+          {activeForm === 'experience' && <ExperienceForm onSubmit={handleSubmit} editItem={editItem} />}
+        </div>
+
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           {stats.map((stat, index) => (

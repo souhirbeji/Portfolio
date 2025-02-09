@@ -1,27 +1,32 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
-
+import { useNavigate} from 'react-router-dom';
+import {login, register} from '../redux/Slices/AuthSlice';
+import {useDispatch, useSelector} from 'react-redux';       // usedispatch pour envoyer des actions au store et use selector pour lire les données du store
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
+  const [username, setUserName] = useState('');
   const navigate = useNavigate();
-  const { login } = useAuth();
-
+  const dispatch = useDispatch();
+  const { isAuthenticated, loading, error } = useSelector((state) => state.auth); // recupère les données du store
+  // handle submit recupére et voir si les champs sont faites ou pas voir si les données du formulaire et les envoie au serveur
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (isLogin) {
-      // Handle login
-      await login(email, password);
-      navigate('/dashboard');
+      dispatch(login({ email, password }));
+      
     } else {
-      // Handle register
-      // Add your register logic here
+      dispatch(register({ username, email, password }));
     }
   };
+useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/dashboard');
+    }
+  }, [isAuthenticated]);
+  
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-violet-500 to-teal-500 flex items-center justify-center p-6">
@@ -50,8 +55,8 @@ const Auth = () => {
               </label>
               <input
                 type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                value={username}
+                onChange={(e) => setUserName(e.target.value)}
                 className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-violet-500 dark:bg-gray-700"
                 placeholder="John Doe"
                 required={!isLogin}
@@ -91,10 +96,13 @@ const Auth = () => {
             type="submit"
             className="w-full bg-gradient-to-r from-violet-500 to-teal-500 text-white py-3 rounded-lg font-medium hover:opacity-90 transition-opacity"
           >
-            {isLogin ? 'Sign In' : 'Create Account'}
+            {
+              loading ? 'Loading...' : isLogin ? 'Sign in' : 'Sign up'
+            
+            }
           </button>
+          {error && <p className="text-red-500 text-sm text-center">{error}</p>}
         </form>
-
         <div className="mt-6 text-center">
           <button
             onClick={() => setIsLogin(!isLogin)}

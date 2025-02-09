@@ -12,13 +12,22 @@ const projectSchema = new mongoose.Schema({
     technologies: [{
         type: String
     }],
-    imageUrl: String,
-    githubLink: String,
-    demoLink: String,
-    userId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+    imageUrl: {
+        type: String,
         required: true
+    },
+    githubLink: {
+        type: String,
+        required: true
+    },
+    demoLink: {
+        type: String,
+        required: true
+    },
+    category: {
+        type: String,
+        required: true,
+        enum: ['frontend', 'fullstack', 'mobile']
     }
 }, {
     timestamps: true
