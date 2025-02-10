@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { register, login } = require('../controllers/authController');
+const { register, login, checkAuth } = require('../controllers/authController');
+const auth = require('../middleware/auth');
 const { body } = require('express-validator');
 
 // Validation middleware
@@ -18,5 +19,6 @@ const loginValidation = [
 // Routes
 router.post('/register', registerValidation, register);
 router.post('/login', loginValidation, login);
+router.get('/check', auth, checkAuth); // Nouvelle route protégée
 
 module.exports = router;

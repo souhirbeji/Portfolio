@@ -11,8 +11,26 @@ import Auth from './pages/Auth';
 import Dashboard from './pages/Dashboard';
 import ProtectedRoute from './components/ProtectedRoute';
 import Experience from './pages/Experience';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { checkAuth } from './redux/Slices/AuthThunk';
 
 function App() {
+  const dispatch = useDispatch();
+  const { loading } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    dispatch(checkAuth());
+  }, [dispatch]);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+      </div>
+    );
+  }
+
   return (
     <ThemeProvider>
       <AuthProvider>
@@ -27,7 +45,7 @@ function App() {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/auth" element={<Auth />} />
                 <Route path="/experience" element={<Experience />} />
-                <Route path="/dashboard" element={ <Dashboard />} />
+              
                 <Route
                   path="/dashboard"
                   element={

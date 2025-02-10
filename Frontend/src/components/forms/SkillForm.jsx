@@ -1,80 +1,120 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
+import { createSkill, updateSkill } from '../../redux/Slices/SkillThunk';
+import { FormField, Input, Select, Button } from './FormComponents';
+import { SKILL_CATEGORIES, ICONS } from '../../utils/constants';
 
-const SkillForm = ({ skill, onSubmit, onCancel }) => {
+const SkillForm = ({ skillToEdit, onSubmit, onCancel }) => {
+  const dispatch = useDispatch();
+  const { loading, error } = useSelector(state => state.skills);
   const [formData, setFormData] = useState({
-    name: skill?.name || '',
-    level: skill?.level || 1,
-    category: skill?.category || 'frontend'
+    name: '',
+    category: 'frontend',
+    icon: '',
+    iconColor: 'blue-500'
   });
+  const [selectedIcon, setSelectedIcon] = useState(null);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit(formData);
+  useEffect(() => {
+    if (skillToEdit) {
+      setFormData(skillToEdit);
+      const iconObj = ICONS[skillToEdit.category]?.find(i => i.icon === skillToEdit.icon);
+      setSelectedIcon(iconObj);
+    }
+  }, [skillToEdit]);
+
+  const handleCategoryChange = (e) => {
+    const category = e.target.value;
+    setFormData(prev => ({
+      ...prev,
+      category,
+      icon: '',
+      iconColor: 'blue-500'
+    }));
+    setSelectedIcon(null);
+  };
+
+  const handleIconSelect = (iconObj) => {
+    setSelectedIcon(iconObj);
+    setFormData(prev => ({
+      ...prev,
+      icon: iconObj.icon,
+      iconColor: iconObj.color
+    }));
   };
 
   return (
     <motion.form
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      className="p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg"
-      onSubmit={handleSubmit}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg space-y-6"
+      onSubmit={async (e) => {
+        e.preventDefault();
+        try {
+          if (skillToEdit) {
+            await dispatch(updateSkill({ id: skillToEdit._id, skillData: formData })).unwrap();
+          } else {
+            await dispatch(createSkill(formData)).unwrap();
+          }
+          onCancel();
+        } catch (err) {
+          console.error('Failed to save skill:', err);
+        }
+      }}
     >
-      <div className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium mb-1">Skill Name</label>
-          <input
-            type="text"
-            value={formData.name}
-            onChange={(e) => setFormData({...formData, name: e.target.value})}
-            className="w-full p-2 rounded-lg border dark:bg-gray-700 dark:border-gray-600"
-            required
-          />
-        </div>
-        
-        <div>
-          <label className="block text-sm font-medium mb-1">Level (1-5)</label>
-          <input
-            type="number"
-            min="1"
-            max="5"
-            value={formData.level}
-            onChange={(e) => setFormData({...formData, level: parseInt(e.target.value)})}
-            className="w-full p-2 rounded-lg border dark:bg-gray-700 dark:border-gray-600"
-            required
-          />
-        </div>
+      <FormField label="Skill Name">
+        <Input
+          type="text"
+          value={formData.name}
+          onChange={(e) => setFormData({...formData, name: e.target.value})}
+          required
+        />
+      </FormField>
 
-        <div>
-          <label className="block text-sm font-medium mb-1">Category</label>
-          <select
-            value={formData.category}
-            onChange={(e) => setFormData({...formData, category: e.target.value})}
-            className="w-full p-2 rounded-lg border dark:bg-gray-700 dark:border-gray-600"
-            required
-          >
-            <option value="frontend">Frontend</option>
-            <option value="backend">Backend</option>
-            <option value="tools">Tools</option>
-            <option value="other">Other</option>
-          </select>
-        </div>
+      <FormField label="Category">
+        <Select
+          value={formData.category}
+          onChange={handleCategoryChange}
+          options={SKILL_CATEGORIES}
+          required
+        />
+      </FormField>
 
-        <div className="flex space-x-4">
-          <button
-            type="submit"
-            className="px-4 py-2 bg-violet-500 text-white rounded-lg hover:bg-violet-600"
-          >
-            {skill ? 'Update' : 'Create'} Skill
-          </button>
-          <button
-            type="button"
-            onClick={onCancel}
-            className="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg"
-          >
-            Cancel
-          </button>
+      <FormField label="Select Icon">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+          {ICONS[formData.category]?.map((iconObj) => (
+            <button
+              key={iconObj.icon}
+              type="button"
+              onClick={() => handleIconSelect(iconObj)}
+              className={`p-4 rounded-lg flex flex-col items-center gap-2 transition-all
+                ${selectedIcon?.icon === iconObj.icon 
+                  ? 'bg-violet-100 dark:bg-violet-900 ring-2 ring-violet-500' 
+                  : 'bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700'}`}
+            >
+              <i className={`fab ${iconObj.icon} text-2xl text-${iconObj.color}`} />
+              <span className="text-sm">{iconObj.name}</span>
+            </button>
+          ))}
         </div>
+      </FormField>
+
+      <div className="flex justify-end space-x-4">
+        <Button
+          variant="secondary"
+          type="button"
+          onClick={onCancel}
+          disabled={loading}
+        >
+          Cancel
+        </Button>
+        <Button
+          type="submit"
+          disabled={loading}
+        >
+          {loading ? 'Saving...' : skillToEdit ? 'Update Skill' : 'Create Skill'}
+        </Button>
       </div>
     </motion.form>
   );

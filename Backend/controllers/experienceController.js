@@ -27,7 +27,9 @@ exports.createExperience = async (req, res) => {
         startDate: req.body.startDate,
         endDate: req.body.endDate,
         description: req.body.description,
-        technologies: req.body.technologies
+        technologies: req.body.technologies,
+        type: req.body.type,
+        period: req.body.period
     });
 
     try {

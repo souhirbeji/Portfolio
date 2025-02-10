@@ -16,16 +16,16 @@ const Auth = () => {
     e.preventDefault();
     if (isLogin) {
       dispatch(login({ email, password }));
-      
     } else {
       dispatch(register({ username, email, password }));
     }
   };
+
 useEffect(() => {
-    if (isAuthenticated) {
+    if (isAuthenticated && !loading && !error) {
       navigate('/dashboard');
     }
-  }, [isAuthenticated]);
+  }, []);
   
 
   return (
@@ -101,7 +101,11 @@ useEffect(() => {
             
             }
           </button>
-          {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+          {error && (
+            <p className="text-red-500 text-sm text-center">
+              {typeof error === 'string' ? error : error.message || 'Une erreur est survenue'}
+            </p>
+          )}
         </form>
         <div className="mt-6 text-center">
           <button

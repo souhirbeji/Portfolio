@@ -1,126 +1,113 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
+import { createProject, updateProject } from '../../redux/Slices/Projectthunk';
+import { FormField, Input, Select, TextArea, TagInput, Button } from './FormComponents';
+import { PROJECT_CATEGORIES, TECH_STACK } from '../../utils/constants';
 
-const ProjectForm = ({ project, onSubmit, onCancel }) => {
+const ProjectForm = ({ projectToEdit, onSubmit, onCancel }) => {
+  const dispatch = useDispatch();
+  const { loading, error } = useSelector(state => state.projects);
   const [formData, setFormData] = useState({
-    title: project?.title || '',
-    description: project?.description || '',
-    technologies: project?.technologies?.join(', ') || '',
-    imageUrl: project?.imageUrl || '',
-    githubLink: project?.githubLink || '',
-    demoLink: project?.demoLink || '',
-    category: project?.category || 'frontend'
+    title: '',
+    description: '',
+    technologies: [],
+    imageUrl: '',
+    githubLink: '',
+    demoLink: '',
+    category: 'frontend'
   });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const technologies = formData.technologies
-      .split(',')
-      .map(tech => tech.trim())
-      .filter(tech => tech);
-    onSubmit({ ...formData, technologies });
-  };
+  useEffect(() => {
+    if (projectToEdit) {
+      setFormData(projectToEdit);
+    }
+  }, [projectToEdit]);
 
   return (
     <motion.form
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      className="p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg"
-      onSubmit={handleSubmit}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="space-y-6 p-6"
+      onSubmit={(e) => {
+        e.preventDefault();
+        onSubmit(formData);
+      }}
     >
-      <div className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium mb-1">Project Title</label>
-          <input
-            type="text"
-            value={formData.title}
-            onChange={(e) => setFormData({...formData, title: e.target.value})}
-            className="w-full p-2 rounded-lg border dark:bg-gray-700 dark:border-gray-600"
-            required
-          />
-        </div>
+      <FormField label="Project Title" required>
+        <Input
+          value={formData.title}
+          onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+          placeholder="My Awesome Project"
+          required
+        />
+      </FormField>
 
-        <div>
-          <label className="block text-sm font-medium mb-1">Description</label>
-          <textarea
-            value={formData.description}
-            onChange={(e) => setFormData({...formData, description: e.target.value})}
-            className="w-full p-2 rounded-lg border dark:bg-gray-700 dark:border-gray-600"
-            rows="4"
-            required
-          />
-        </div>
+      <FormField label="Description" required>
+        <TextArea
+          value={formData.description}
+          onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+          rows={4}
+          required
+        />
+      </FormField>
 
-        <div>
-          <label className="block text-sm font-medium mb-1">Technologies (comma-separated)</label>
-          <input
-            type="text"
-            value={formData.technologies}
-            onChange={(e) => setFormData({...formData, technologies: e.target.value})}
-            className="w-full p-2 rounded-lg border dark:bg-gray-700 dark:border-gray-600"
-          />
-        </div>
+      <FormField label="Technologies">
+        <TagInput
+          value={formData.technologies}
+          onChange={(techs) => setFormData({ ...formData, technologies: techs })}
+          suggestions={TECH_STACK}
+        />
+      </FormField>
 
-        <div>
-          <label className="block text-sm font-medium mb-1">Category</label>
-          <select
-            value={formData.category}
-            onChange={(e) => setFormData({...formData, category: e.target.value})}
-            className="w-full p-2 rounded-lg border dark:bg-gray-700 dark:border-gray-600"
-            required
-          >
-            <option value="frontend">Frontend</option>
-            <option value="fullstack">Full Stack</option>
-            <option value="mobile">Mobile</option>
-            <option value="other">Other</option>
-          </select>
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1">Image URL</label>
-          <input
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <FormField label="Image URL" required>
+          <Input
             type="url"
             value={formData.imageUrl}
-            onChange={(e) => setFormData({...formData, imageUrl: e.target.value})}
-            className="w-full p-2 rounded-lg border dark:bg-gray-700 dark:border-gray-600"
+            onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
+            placeholder="https://example.com/image.jpg"
+            required
           />
-        </div>
+        </FormField>
 
-        <div>
-          <label className="block text-sm font-medium mb-1">GitHub Link</label>
-          <input
+        <FormField label="GitHub Link" required>
+          <Input
             type="url"
             value={formData.githubLink}
-            onChange={(e) => setFormData({...formData, githubLink: e.target.value})}
-            className="w-full p-2 rounded-lg border dark:bg-gray-700 dark:border-gray-600"
+            onChange={(e) => setFormData({ ...formData, githubLink: e.target.value })}
+            placeholder="https://github.com/username/project"
+            required
           />
-        </div>
+        </FormField>
 
-        <div>
-          <label className="block text-sm font-medium mb-1">Demo Link</label>
-          <input
+        <FormField label="Demo Link" required>
+          <Input
             type="url"
             value={formData.demoLink}
-            onChange={(e) => setFormData({...formData, demoLink: e.target.value})}
-            className="w-full p-2 rounded-lg border dark:bg-gray-700 dark:border-gray-600"
+            onChange={(e) => setFormData({ ...formData, demoLink: e.target.value })}
+            placeholder="https://myproject.com"
+            required
           />
-        </div>
+        </FormField>
 
-        <div className="flex space-x-4">
-          <button
-            type="submit"
-            className="px-4 py-2 bg-violet-500 text-white rounded-lg hover:bg-violet-600"
-          >
-            {project ? 'Update' : 'Create'} Project
-          </button>
-          <button
-            type="button"
-            onClick={onCancel}
-            className="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg"
-          >
-            Cancel
-          </button>
-        </div>
+        <FormField label="Category" required>
+          <Select
+            value={formData.category}
+            onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+            options={PROJECT_CATEGORIES}
+            required
+          />
+        </FormField>
+      </div>
+
+      <div className="flex justify-end space-x-4">
+        <Button type="button" variant="secondary" onClick={onCancel}>
+          Cancel
+        </Button>
+        <Button type="submit">
+          {projectToEdit ? 'Update' : 'Create'} Project
+        </Button>
       </div>
     </motion.form>
   );

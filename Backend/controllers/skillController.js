@@ -23,7 +23,8 @@ exports.createSkill = async (req, res) => {
     const skill = new Skill({
         name: req.body.name,
         level: req.body.level,
-        category: req.body.category
+        category: req.body.category,
+        icon: req.body.icon,
     });
 
     try {
