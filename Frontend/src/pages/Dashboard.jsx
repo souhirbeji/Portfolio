@@ -85,6 +85,33 @@ const Dashboard = () => {
     }
   };
 
+  const handleEdit = (item, type) => {
+    setItemToEdit(item);
+    setActiveForm(type);
+  };
+
+  const handleDelete = async (id, type) => {
+    if (window.confirm('Êtes-vous sûr de vouloir supprimer cet élément ?')) {
+      try {
+        switch (type) {
+          case 'skill':
+            await dispatch(deleteSkill(id)).unwrap();
+            break;
+          case 'project':
+            await dispatch(deleteProject(id)).unwrap();
+            break;
+          case 'experience':
+            await dispatch(deleteExperience(id)).unwrap();
+            break;
+          default:
+            console.error('Type de suppression non reconnu:', type);
+        }
+      } catch (error) {
+        console.error('Erreur lors de la suppression:', error);
+      }
+    }
+  };
+
   const renderFormContent = () => {
     switch (activeForm) {
       case 'skill':
@@ -182,9 +209,7 @@ const Dashboard = () => {
               title: experience.title,
               subtitle: experience.company,
               description: experience.description,
-              date: `${new Date(experience.startDate).getFullYear()} - ${
-                experience.endDate ? new Date(experience.endDate).getFullYear() : 'Present'
-              }`,
+              date: `${experience.period}`,
               tags: experience.technologies
             })}
           />

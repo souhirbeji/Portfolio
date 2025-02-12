@@ -36,7 +36,7 @@ function App() {
       <AuthProvider>
         <Router>
           <div className="flex flex-col min-h-screen">
-            <Header />
+            {window.location.pathname !== '/dashboard' && <Header />}
             <main className="flex-grow">
               <Routes>
                 <Route path="/" element={<Home />} />

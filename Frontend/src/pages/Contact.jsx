@@ -23,10 +23,8 @@ const Contact = () => {
   };
 
   const socialLinks = [
-    { icon: <FaGithub />, label: 'GitHub', url: 'https://github.com', color: 'hover:text-gray-800' },
-    { icon: <FaLinkedin />, label: 'LinkedIn', url: 'https://linkedin.com', color: 'hover:text-blue-600' },
-    { icon: <FaTwitter />, label: 'Twitter', url: 'https://twitter.com', color: 'hover:text-blue-400' },
-  ];
+    { icon: <FaGithub />, label: 'GitHub', url: 'https://github.com/souhirbeji', color: 'hover:text-gray-800' },
+    { icon: <FaLinkedin />, label: 'LinkedIn', url: 'https://www.linkedin.com/in/souhir-beji-3952021b4/', color: 'hover:text-blue-600' },  ];
 
   const contactInfo = [
     { icon: <FaEnvelope />, label: 'Email', value: 'contact@example.com' },

@@ -4,76 +4,31 @@ import { SiTypescript, SiTailwindcss, SiFirebase } from 'react-icons/si';
 import { FaBriefcase, FaCalendar, FaMapMarkerAlt } from 'react-icons/fa';
 import { FaCode, FaBookReader, FaDumbbell, FaFilm } from 'react-icons/fa';
 import { SiMyanimelist } from 'react-icons/si';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchSkills } from '../redux/Slices/SkillThunk';
 
 const About = () => {
-  const skills = [
-    { 
-      category: "Frontend", 
-      items: [
-        { name: "React", icon: <FaReact className="text-blue-500" /> },
-        { name: "Vue.js", icon: <FaVuejs className="text-green-500" /> },
-        { name: "TypeScript", icon: <SiTypescript className="text-blue-600" /> },
-        { name: "Tailwind CSS", icon: <SiTailwindcss className="text-teal-500" /> }
-      ]
-    },
-    { 
-      category: "Backend", 
-      items: [
-        { name: "Node.js", icon: <FaNodeJs className="text-green-600" /> },
-        { name: "Python", icon: <FaPython className="text-yellow-500" /> },
-        { name: "Java", icon: <FaJava className="text-red-500" /> },
-        { name: "PostgreSQL", icon: <FaDatabase className="text-blue-400" /> }
-      ]
-    },
-    { 
-      category: "Outils", 
-      items: [
-        { name: "Git", icon: <FaGitAlt className="text-orange-500" /> },
-        { name: "Docker", icon: <FaDocker className="text-blue-500" /> },
-        { name: "AWS", icon: <FaAws className="text-yellow-500" /> },
-        { name: "Firebase", icon: <SiFirebase className="text-orange-500" /> }
-      ]
-    }
-  ];
+  const dispatch = useDispatch();
+  const { skills, loading: skillsLoading, error: skillsError } = useSelector(state => state.skills);
 
-  const experiences = [
-    {
-      title: "Lead Développeur Full Stack",
-      company: "Tech Innovation",
-      location: "Paris",
-      period: "2022 - Présent",
-      description: "Direction d'une équipe de développeurs sur des projets innovants utilisant React et Node.js",
-      achievements: [
-        "Augmentation de 40% de la performance des applications",
-        "Mise en place de CI/CD avec GitHub Actions",
-        "Mentorat de 5 développeurs juniors"
-      ]
-    },
-    {
-      title: "Développeur Frontend",
-      company: "Digital Agency",
-      location: "Lyon",
-      period: "2020 - 2022",
-      description: "Développement d'interfaces utilisateur modernes et responsives",
-      achievements: [
-        "Refonte complète de 3 applications majeures",
-        "Implémentation de tests automatisés",
-        "Réduction de 50% du temps de chargement"
-      ]
-    },
-    {
-      title: "Développeur Full Stack Junior",
-      company: "Startup Studio",
-      location: "Bordeaux",
-      period: "2019 - 2020",
-      description: "Développement full stack sur diverses applications web",
-      achievements: [
-        "Création de 4 applications web complètes",
-        "Intégration de systèmes de paiement",
-        "Optimisation SEO"
-      ]
+  useEffect(() => {
+    dispatch(fetchSkills());
+  }, [dispatch]);
+
+  // Fonction pour mettre la première lettre en majuscule
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
+  // Regrouper les compétences par catégorie
+  const groupedSkills = skills ? skills.reduce((acc, skill) => {
+    if (!acc[skill.category]) {
+      acc[skill.category] = [];
     }
-  ];
+    acc[skill.category].push(skill);
+    return acc;
+  }, {}) : {};
 
   const passions = {
     anime: {
@@ -128,25 +83,31 @@ const About = () => {
             >
               <h2 className="text-2xl font-bold mb-6">Compétences Techniques</h2>
               <div className="grid gap-6">
-                {skills.map((skillGroup, index) => (
-                  <motion.div
-                    key={skillGroup.category}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.2 }}
-                    className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg"
-                  >
-                    <h3 className="text-xl font-semibold mb-4 text-violet-500">{skillGroup.category}</h3>
-                    <ul className="space-y-4">
-                      {skillGroup.items.map((skill) => (
-                        <li key={skill.name} className="flex items-center space-x-3">
-                          <span className="text-xl">{skill.icon}</span>
-                          <span>{skill.name}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </motion.div>
-                ))}
+                {skillsLoading ? (
+                  <p>Loading skills...</p>
+                ) : skillsError ? (
+                  <p>Error: {skillsError}</p>
+                ) : (
+                  Object.entries(groupedSkills).map(([category, skills]) => (
+                    <motion.div
+                      key={category}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.2 }}
+                      className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg"
+                    >
+                      <h3 className="text-xl font-semibold mb-4 text-violet-500">{capitalizeFirstLetter(category)}</h3>
+                      <ul className="space-y-4">
+                        {skills.map((skill) => (
+                          <li key={skill._id} className="flex items-center space-x-3">
+                            <span className="text-xl"><i className={`fab ${skill.icon} text-${skill.iconColor}`} /></span>
+                            <span>{skill.name}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </motion.div>
+                  ))
+                )}
               </div>
             </motion.div>
 

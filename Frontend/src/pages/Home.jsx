@@ -1,31 +1,17 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FaArrowRight, FaGithub, FaLinkedin, FaCode, FaLightbulb, FaRocket } from 'react-icons/fa';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProjects } from '../redux/Slices/Projectthunk';
 
 const Home = () => {
-  const featuredProjects = [
-    {
-      title: "E-commerce Modern",
-      description: "Application e-commerce avec panier et paiement",
-      image: "/images/ecommerce-app.jpg",
-      technologies: ["React", "Node.js", "MongoDB"],
-      link: "/projects"
-    },
-    {
-      title: "Application Mobile",
-      description: "Application de suivi fitness avec analyses",
-      image: "/images/fitness-app.jpg",
-      technologies: ["React Native", "Firebase"],
-      link: "/projects"
-    },
-    {
-      title: "Dashboard Analytics",
-      description: "Interface d'administration avec graphiques",
-      image: "/images/dashboard-app.jpg",
-      technologies: ["Vue.js", "D3.js"],
-      link: "/projects"
-    }
-  ];
+  const dispatch = useDispatch();
+  const { projects, loading, error } = useSelector(state => state.projects);
+
+  useEffect(() => {
+    dispatch(fetchProjects());
+  }, [dispatch]);
 
   const services = [
     {
@@ -44,6 +30,8 @@ const Home = () => {
       description: "Amélioration des performances et SEO"
     }
   ];
+
+  const featuredProjects = projects ? projects.filter(project => project.favorite).slice(0, 3) : [];
 
   return (
     <div className="min-h-screen">
@@ -134,45 +122,51 @@ const Home = () => {
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredProjects.map((project, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.2 }}
-                className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg"
-              >
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-48 object-cover"
-                />
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-300 mb-4">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.technologies.map((tech, i) => (
-                      <span
-                        key={i}
-                        className="px-3 py-1 bg-violet-100 dark:bg-violet-900 text-violet-600 dark:text-violet-300 rounded-full text-sm"
-                      >
-                        {tech}
-                      </span>
-                    ))}
+            {loading ? (
+              <p>Loading projects...</p>
+            ) : error ? (
+              <p>Error: {error}</p>
+            ) : (
+              featuredProjects.map((project, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.2 }}
+                  className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg"
+                >
+                  <img
+                    src={project.imageUrl}
+                    alt={project.title}
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold mb-2">{project.title}</h3>
+                    <p className="text-gray-600 dark:text-gray-300 mb-4">
+                      {project.description}
+                    </p>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {project.technologies.map((tech, i) => (
+                        <span
+                          key={i}
+                          className="px-3 py-1 bg-violet-100 dark:bg-violet-900 text-violet-600 dark:text-violet-300 rounded-full text-sm"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                    <Link
+                      to={project.link}
+                      className="inline-flex items-center text-violet-500 hover:text-violet-600"
+                    >
+                      En savoir plus
+                      <FaArrowRight className="ml-2" />
+                    </Link>
                   </div>
-                  <Link
-                    to={project.link}
-                    className="inline-flex items-center text-violet-500 hover:text-violet-600"
-                  >
-                    En savoir plus
-                    <FaArrowRight className="ml-2" />
-                  </Link>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              ))
+            )}
           </div>
         </div>
       </section>

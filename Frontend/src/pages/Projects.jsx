@@ -1,39 +1,17 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import ProjectCard from '../components/ProjectCard';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProjects } from '../redux/Slices/Projectthunk';
 
 const Projects = () => {
   const [filter, setFilter] = useState('all');
+  const dispatch = useDispatch();
+  const { projects, loading, error } = useSelector(state => state.projects);
 
-  const projects = [
-    {
-      title: "E-commerce Modern",
-      description: "Application e-commerce complète avec panier et paiement",
-      technologies: ["React", "Node.js", "MongoDB", "Stripe"],
-      imageUrl: "/images/ecommerce-app.jpg",
-      githubLink: "https://github.com",
-      demoLink: "https://demo.com",
-      category: "fullstack"
-    },
-    {
-      title: "Application Mobile",
-      description: "Application mobile de suivi fitness",
-      technologies: ["React Native", "Firebase", "Redux"],
-      imageUrl: "/images/fitness-app.jpg",
-      githubLink: "https://github.com",
-      demoLink: "https://demo.com",
-      category: "mobile"
-    },
-    {
-      title: "Dashboard Analytics",
-      description: "Tableau de bord d'analyse de données",
-      technologies: ["Vue.js", "D3.js", "Node.js"],
-      imageUrl: "/images/dashboard-analytics.jpg",
-      githubLink: "https://github.com",
-      demoLink: "https://demo.com",
-      category: "frontend"
-    }
-  ];
+  useEffect(() => {
+    dispatch(fetchProjects());
+  }, [dispatch]);
 
   const categories = [
     { id: 'all', name: 'Tous' },
@@ -42,9 +20,9 @@ const Projects = () => {
     { id: 'mobile', name: 'Mobile' }
   ];
 
-  const filteredProjects = filter === 'all' 
-    ? projects 
-    : projects.filter(project => project.category === filter);
+  const filteredProjects = projects ? (filter === 'all'
+    ? projects
+    : projects.filter(project => project.category === filter)) : [];
 
   return (
     <div className="min-h-screen pt-24 pb-16">

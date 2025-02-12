@@ -10,7 +10,7 @@ const ItemList = ({ items, loading, onEdit, onDelete, renderItem }) => {
     <div className="grid gap-4">
       {items?.map((item, index) => {
         const renderedItem = renderItem(item);
-        
+
         return (
           <motion.div
             key={item._id}
@@ -22,7 +22,7 @@ const ItemList = ({ items, loading, onEdit, onDelete, renderItem }) => {
             <div className="flex items-start justify-between">
               <div className="flex items-center space-x-4">
                 {renderedItem.image && (
-                  <img 
+                  <img
                     src={renderedItem.image}
                     alt={renderedItem.title}
                     className="w-16 h-16 rounded-lg object-cover"

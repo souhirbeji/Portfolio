@@ -15,7 +15,8 @@ const ProjectForm = ({ projectToEdit, onSubmit, onCancel }) => {
     imageUrl: '',
     githubLink: '',
     demoLink: '',
-    category: 'frontend'
+    category: 'frontend',
+    favorite: false,
   });
 
   useEffect(() => {
@@ -97,6 +98,15 @@ const ProjectForm = ({ projectToEdit, onSubmit, onCancel }) => {
             onChange={(e) => setFormData({ ...formData, category: e.target.value })}
             options={PROJECT_CATEGORIES}
             required
+          />
+        </FormField>
+
+        <FormField label="Favorite">
+          <input
+            type="checkbox"
+            checked={formData.favorite}
+            onChange={(e) => setFormData({ ...formData, favorite: e.target.checked })}
+            className="w-5 h-5 text-violet-600"
           />
         </FormField>
       </div>

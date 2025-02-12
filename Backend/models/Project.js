@@ -20,6 +20,10 @@ const projectSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    favorite: {
+        type: Boolean,
+        default: false
+    },
     demoLink: {
         type: String,
         required: true
@@ -28,6 +32,11 @@ const projectSchema = new mongoose.Schema({
         type: String,
         required: true,
         enum: ['frontend', 'fullstack', 'mobile']
+    },
+    userId : {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
     }
 }, {
     timestamps: true

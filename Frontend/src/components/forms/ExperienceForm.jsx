@@ -28,14 +28,20 @@ const ExperienceForm = ({ experienceToEdit, onCancel }) => {
     highlights: '',
     companyLogo: '',
     websiteUrl: '',
-    linkedInUrl: ''
+    linkedInUrl: '',
+    period: ''
   });
 
   useEffect(() => {
     if (experienceToEdit) {
       setFormData({
         ...experienceToEdit,
-        current: !experienceToEdit.endDate
+        current: !experienceToEdit.endDate,
+        period: experienceToEdit.endDate ? `${new Date(experienceToEdit.startDate).toLocaleString('default', { month: 'long' })} ${new Date(experienceToEdit.startDate).getFullYear()} - ${new Date(experienceToEdit.endDate).toLocaleString('default', { month: 'long' })} ${new Date(experienceToEdit.endDate).getFullYear()}` : `${new Date(experienceToEdit.startDate).toLocaleString('default', { month: 'long' })} ${new Date(experienceToEdit.startDate).getFullYear()} - Présent`,
+        achievements: experienceToEdit.achievements || [], // Initialise achievements si undefined
+        responsibilities: experienceToEdit.responsibilities || [], // Initialise responsibilities si undefined
+        technologies: experienceToEdit.technologies || [], // Initialise technologies si undefined
+        tools: experienceToEdit.tools || [], // Initialise tools si undefined
       });
     }
   }, [experienceToEdit]);
@@ -52,10 +58,11 @@ const ExperienceForm = ({ experienceToEdit, onCancel }) => {
         ...formData,
         startDate: formatDateForAPI(formData.startDate),
         endDate: formData.current ? null : formatDateForAPI(formData.endDate),
-        achievements: formData.achievements.filter(Boolean),
-        responsibilities: formData.responsibilities.filter(Boolean),
-        tools: formData.tools.filter(Boolean),
-        keywords: formData.keywords.filter(Boolean)
+        achievements: formData.achievements ? formData.achievements.filter(Boolean) : [],
+        responsibilities: formData.responsibilities ? formData.responsibilities.filter(Boolean) : [],
+        tools: formData.tools ? formData.tools.filter(Boolean) : [],
+        keywords: formData.keywords ? formData.keywords.filter(Boolean) : [],
+        period: formData.endDate ? `${new Date(formData.startDate).toLocaleString('default', { month: 'long' })} ${new Date(formData.startDate).getFullYear()} - ${new Date(formData.endDate).toLocaleString('default', { month: 'long' })} ${new Date(formData.endDate).getFullYear()}` : `${new Date(formData.startDate).toLocaleString('default', { month: 'long' })} ${new Date(formData.startDate).getFullYear()} - Présent`
       };
 
       if (experienceToEdit) {
@@ -107,15 +114,6 @@ const ExperienceForm = ({ experienceToEdit, onCancel }) => {
             required
           />
         </FormField>
-
-        <FormField label="Employment Type" required>
-          <Select
-            value={formData.type}
-            onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-            options={EMPLOYMENT_TYPES}
-            required
-          />
-        </FormField>
       </div>
 
       {/* Dates */}
@@ -163,49 +161,16 @@ const ExperienceForm = ({ experienceToEdit, onCancel }) => {
           required
         />
       </FormField>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <FormField label="Team Size">
-          <Input
-            type="number"
-            value={formData.teamSize}
-            onChange={(e) => setFormData({ ...formData, teamSize: e.target.value })}
-            placeholder="5"
-          />
-        </FormField>
-
-        <FormField label="Number of Projects">
-          <Input
-            type="number"
-            value={formData.projectCount}
-            onChange={(e) => setFormData({ ...formData, projectCount: e.target.value })}
-            placeholder="3"
-          />
-        </FormField>
-      </div>
-
       {/* Lists */}
       <FormField label="Key Achievements">
         <TextArea
-          value={formData.achievements.join('\n')}
+          value={(formData.achievements || []).join('\n')}
           onChange={(e) => setFormData({ 
             ...formData, 
             achievements: e.target.value.split('\n')
           })}
           rows={4}
           placeholder="• Increased team productivity by 40%&#10;• Implemented new CI/CD pipeline&#10;• Reduced bug rate by 60%"
-        />
-      </FormField>
-
-      <FormField label="Main Responsibilities">
-        <TextArea
-          value={formData.responsibilities.join('\n')}
-          onChange={(e) => setFormData({ 
-            ...formData, 
-            responsibilities: e.target.value.split('\n')
-          })}
-          rows={4}
-          placeholder="• Led team of 5 developers&#10;• Managed sprint planning&#10;• Architected new features"
         />
       </FormField>
 
@@ -216,35 +181,6 @@ const ExperienceForm = ({ experienceToEdit, onCancel }) => {
           suggestions={TECH_STACK}
         />
       </FormField>
-
-      <FormField label="Tools & Software">
-        <TagInput
-          value={formData.tools}
-          onChange={(tools) => setFormData({ ...formData, tools: tools })}
-          suggestions={['Jira', 'Git', 'Docker', 'Jenkins', 'AWS']}
-        />
-      </FormField>
-
-      {/* Additional Information */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <FormField label="Company Logo URL">
-          <Input
-            type="url"
-            value={formData.companyLogo}
-            onChange={(e) => setFormData({ ...formData, companyLogo: e.target.value })}
-            placeholder="https://company.com/logo.png"
-          />
-        </FormField>
-
-        <FormField label="Company Website">
-          <Input
-            type="url"
-            value={formData.websiteUrl}
-            onChange={(e) => setFormData({ ...formData, websiteUrl: e.target.value })}
-            placeholder="https://company.com"
-          />
-        </FormField>
-      </div>
 
       <FormField label="Theme Color">
         <Select
