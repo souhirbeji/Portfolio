@@ -1,0 +1,268 @@
+{
+  "nav": {
+    "home": "Home",
+    "projects": "Projects",
+    "about": "About",
+    "contact": "Contact",
+    "dashboard": "Dashboard"
+  },
+  "dashboard": {
+    "title": "Portfolio Dashboard",
+    "subtitle": "Manage your content and track your statistics in real-time",
+    "stats": {
+      "totalProjects": "Total Projects",
+      "totalSkills": "Skills",
+      "experiences": "Experiences",
+      "profileViews": "Profile Views"
+    },
+    "sections": {
+      "overview": "Overview",
+      "skills": "Skills",
+      "projects": "Projects",
+      "experiences": "Experiences",
+      "messages": "Messages"
+    },
+    "charts": {
+      "skillsOverview": "Skills Overview",
+      "projectDistribution": "Project Distribution",
+      "recentActivities": "Recent Activities",
+      "technologiesUsage": "Technologies Usage"
+    },
+    "actions": {
+      "logout": "Logout",
+      "edit": "Edit",
+      "delete": "Delete",
+      "add": "Add",
+      "cancel": "Cancel",
+      "sending": "Sending...",
+      "send": "Send"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "Let's Create Your Digital Presence Together",
+      "subtitle": "Passionate Full Stack Developer and Data Analyst",
+      "cta": {
+        "contact": "Contact Me",
+        "projects": "View Projects"
+      }
+    },
+    "featuredProjects": {
+      "title": "Featured Projects",
+      "subtitle": "Discover some of my recent work",
+      "viewMore": "Learn More"
+    },
+    "services": {
+      "title": "My Services",
+      "subtitle": "Solutions tailored to your needs",
+      "items": {
+        "webdev": {
+          "title": "Web Development",
+          "description": "Creation of modern and reactive web applications"
+        },
+        "dataAnalysis": {
+          "title": "Data Analysis",
+          "description": "Data extraction, transformation, and visualization to optimize decision making"
+        },
+        "ai": {
+          "title": "AI / Machine Learning",
+          "description": "Development of intelligent models to automate processes"
+        }
+      }
+    },
+    "cta": {
+      "title": "Looking for a motivated and passionate intern?",
+      "subtitle": "You've found the right person! Contact me to make your project a reality!",
+      "button": "Contact Me"
+    }
+  },
+  "projects": {
+    "title": "My Projects",
+    "subtitle": "Discover a selection of my work",
+    "categories": {
+      "all": "All",
+      "frontend": "Frontend",
+      "fullstack": "Full Stack",
+      "mobile": "Mobile"
+    },
+    "loading": "Loading projects...",
+    "error": "Error loading projects:"
+  },
+  "footer": {
+    "description": "Passionate Full Stack Developer and Data Analyst",
+    "quickLinks": "Quick Links",
+    "followMe": "Follow Me",
+    "rights": "All rights reserved",
+    "links": {
+      "portfolio": "Portfolio",
+      "about": "About",
+      "contact": "Contact"
+    }
+  },
+  "about": {
+    "title": "About Me",
+    "subtitle": "Passionate about web development for over 5 years, I create innovative digital solutions",
+    "technicalSkills": {
+      "title": "Technical Skills",
+      "loading": "Loading skills..."
+    },
+    "passions": {
+      "title": "My Passions",
+      "anime": {
+        "title": "Anime & Manga",
+        "description": "Passionate about Japanese culture and anime",
+        "favorites": "Favorites"
+      },
+      "philosophy": {
+        "title": "Philosophy",
+        "description": "Philosophy helps me develop critical thinking",
+        "interests": "Interests"
+      },
+      "sport": {
+        "title": "Sport",
+        "description": "Sport is essential to maintain balance",
+        "activities": "Activities"
+      }
+    },
+    "collaboration": {
+      "title": "Want to Collaborate?",
+      "subtitle": "I'm always open to new opportunities and interesting projects",
+      "cta": "Contact Me"
+    }
+  },
+  "contact": {
+    "title": "Contact Me",
+    "subtitle": "Have a project in mind? I'd love to discuss it with you",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "submit": "Send",
+      "sending": "Sending...",
+      "success": "Message sent successfully!",
+      "error": "An error occurred while sending the message. Please try again later."
+    },
+    "info": {
+      "title": "Contact Information",
+      "email": "Email",
+      "location": "Location",
+      "phone": "Phone"
+    },
+    "social": {
+      "title": "Social Networks",
+      "github": "GitHub",
+      "linkedin": "LinkedIn"
+    }
+  },
+  "services": {
+    "web": {
+      "title": "Web Development",
+      "description": "Modern and reactive web applications with the latest technologies"
+    },
+    "data": {
+      "title": "Data Analysis",
+      "description": "Data transformation and visualization for better decision making"
+    },
+    "ai": {
+      "title": "Artificial Intelligence",
+      "description": "Custom AI solutions to automate your processes"
+    }
+  },
+  "career": {
+    "title": "Professional Journey",
+    "experience": "Experience",
+    "education": "Education",
+    "skills": "Skills"
+  },
+  "discussion": {
+    "title": "Let's Discuss Your Project",
+    "subtitle": "Let's take a moment to discuss your needs",
+    "process": {
+      "step1": "First Contact",
+      "step2": "Needs Analysis",
+      "step3": "Proposal",
+      "step4": "Implementation"
+    }
+  },
+  "experience": {
+    "title": "Professional Journey",
+    "subtitle": "My professional journey reflects my passion for web development and my constant commitment to innovation",
+    "loading": "Loading experiences...",
+    "error": "Error loading experiences:",
+    "timeline": {
+      "company": "Company",
+      "location": "Location",
+      "period": "Period",
+      "achievements": "Achievements",
+      "technologies": "Technologies used"
+    },
+    "cta": {
+      "title": "Let's discuss your project",
+      "button": "Contact me"
+    }
+  },
+  "passions": {
+    "title": "My Passions",
+    "categories": {
+      "anime": {
+        "title": "Anime & Manga",
+        "description": "Passionate about Japanese culture and anime",
+        "favorites": "My favorites",
+        "quote": "The journey is more important than the destination",
+        "interests": {
+          "title": "Areas of Interest",
+          "items": [
+            "Japanese animation",
+            "Japanese culture",
+            "Character design",
+            "Visual storytelling"
+          ]
+        }
+      },
+      "philosophy": {
+        "title": "Philosophy",
+        "description": "Philosophy helps me develop critical thinking",
+        "interests": {
+          "title": "Areas of Interest",
+          "items": [
+            "Existentialism",
+            "Stoicism",
+            "Philosophy of Mind",
+            "Ethics"
+          ]
+        },
+        "activities": {
+          "title": "Activities",
+          "items": [
+            "Reading philosophical works",
+            "Participating in debates",
+            "Writing reflections",
+            "Meditation"
+          ]
+        }
+      },
+      "sport": {
+        "title": "Sport",
+        "description": "Sport is essential to maintain balance",
+        "activities": {
+          "title": "Activities",
+          "items": [
+            "Weight training",
+            "Running",
+            "Yoga",
+            "Team sports"
+          ]
+        },
+        "goals": {
+          "title": "Goals",
+          "items": [
+            "Continuous improvement",
+            "Discipline",
+            "Well-being",
+            "Mental balance"
+          ]
+        }
+      }
+    }
+  }
+}

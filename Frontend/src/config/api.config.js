@@ -18,6 +18,15 @@ export const API_CONFIG = {
     EXPERIENCES: {
       BASE: '/experiences',
       BY_ID: (id) => `/experiences/${id}`
+    },
+    MESSAGES: {
+      BASE: '/messages',
+      BY_ID: (id) => `/messages/${id}`,
+      REPLY: (id) => `/messages/${id}/reply`
+    },
+    VIEWS: {
+      COUNT: '/views/count',
+      INCREMENT: '/views/increment'
     }
   }
 };

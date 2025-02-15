@@ -1,18 +1,51 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope, FaMapMarkerAlt, FaPhone } from 'react-icons/fa';
+import { useLanguage } from '../contexts/LanguageContext';
+import { sendMessage } from '../redux/Slices/MessageThunk';
+import Toast from '../components/ui/Toast'; // Assurez-vous d'avoir ce composant
 
 const Contact = () => {
+  const dispatch = useDispatch();
+  const { loading, error } = useSelector(state => state.messages);
+  const { t } = useLanguage();
+  
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: ''
   });
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+  const [toastType, setToastType] = useState('success');
 
-  const handleSubmit = (e) => {
+  const socialLinks = [
+    { icon: <FaGithub />, label: 'GitHub', url: 'https://github.com/souhirbeji', color: 'hover:text-gray-800' },
+    { icon: <FaLinkedin />, label: 'LinkedIn', url: 'https://www.linkedin.com/in/souhir-beji-3952021b4/', color: 'hover:text-blue-600' },  ];
+
+  const contactInfo = [
+    { icon: <FaEnvelope />, label: 'Email', value: 'beji.souhirpro@gmail.com' },
+    { icon: <FaMapMarkerAlt />, label: 'Localisation', value: 'Paris, France' },
+    { icon: <FaPhone />, label: 'Téléphone', value: '+33 6 99 62 24 61' },
+  ];
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Ajoutez ici la logique d'envoi du formulaire
-    console.log(formData);
+    try {
+      await dispatch(sendMessage(formData)).unwrap();
+      // Reset form
+      setFormData({ name: '', email: '', message: '' });
+      // Show success message
+      setToastMessage(t('contact.form.success'));
+      setToastType('success');
+      setShowToast(true);
+    } catch (err) {
+      // Show error message
+      setToastMessage(t('contact.form.error'));
+      setToastType('error');
+      setShowToast(true);
+    }
   };
 
   const handleChange = (e) => {
@@ -21,16 +54,6 @@ const Contact = () => {
       [e.target.name]: e.target.value
     });
   };
-
-  const socialLinks = [
-    { icon: <FaGithub />, label: 'GitHub', url: 'https://github.com/souhirbeji', color: 'hover:text-gray-800' },
-    { icon: <FaLinkedin />, label: 'LinkedIn', url: 'https://www.linkedin.com/in/souhir-beji-3952021b4/', color: 'hover:text-blue-600' },  ];
-
-  const contactInfo = [
-    { icon: <FaEnvelope />, label: 'Email', value: 'contact@example.com' },
-    { icon: <FaMapMarkerAlt />, label: 'Localisation', value: 'Paris, France' },
-    { icon: <FaPhone />, label: 'Téléphone', value: '+33 6 XX XX XX XX' },
-  ];
 
   return (
     <div className="min-h-screen pt-24 pb-16 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
@@ -42,10 +65,10 @@ const Contact = () => {
             className="text-center mb-12"
           >
             <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-violet-500 to-teal-500 bg-clip-text text-transparent">
-              Contactez-moi
+              {t('contact.title')}
             </h1>
             <p className="text-gray-600 dark:text-gray-300">
-              Vous avez un projet en tête ? Je serais ravi d'en discuter avec vous.
+              {t('contact.subtitle')}
             </p>
           </motion.div>
 
@@ -56,7 +79,7 @@ const Contact = () => {
               className="space-y-8"
             >
               <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg">
-                <h3 className="text-xl font-semibold mb-4">Coordonnées</h3>
+                <h3 className="text-xl font-semibold mb-4">{t('contact.info.title')}</h3>
                 <div className="space-y-4">
                   {contactInfo.map((item, index) => (
                     <div key={index} className="flex items-center space-x-3">
@@ -71,7 +94,7 @@ const Contact = () => {
               </div>
 
               <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg">
-                <h3 className="text-xl font-semibold mb-4">Réseaux Sociaux</h3>
+                <h3 className="text-xl font-semibold mb-4">{t('contact.social.title')}</h3>
                 <div className="flex space-x-4">
                   {socialLinks.map((social, index) => (
                     <motion.a
@@ -96,48 +119,82 @@ const Contact = () => {
               className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg space-y-6"
             >
               <div>
-                <label className="block mb-2">Nom</label>
+                <label className="block mb-2 text-gray-700 dark:text-gray-300">
+                  {t('contact.form.name')}
+                </label>
                 <input
                   type="text"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 rounded-lg border dark:bg-gray-800 dark:border-gray-700"
+                  className="w-full px-4 py-2 rounded-lg border dark:bg-gray-700 dark:border-gray-600
+                    focus:ring-2 focus:ring-violet-500 focus:border-transparent
+                    transition duration-150 ease-in-out"
                   required
+                  disabled={loading}
                 />
               </div>
+              
               <div>
-                <label className="block mb-2">Email</label>
+                <label className="block mb-2 text-gray-700 dark:text-gray-300">
+                  {t('contact.form.email')}
+                </label>
                 <input
                   type="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 rounded-lg border dark:bg-gray-800 dark:border-gray-700"
+                  className="w-full px-4 py-2 rounded-lg border dark:bg-gray-700 dark:border-gray-600
+                    focus:ring-2 focus:ring-violet-500 focus:border-transparent
+                    transition duration-150 ease-in-out"
                   required
+                  disabled={loading}
                 />
               </div>
+              
               <div>
-                <label className="block mb-2">Message</label>
+                <label className="block mb-2 text-gray-700 dark:text-gray-300">
+                  {t('contact.form.message')}
+                </label>
                 <textarea
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
                   rows="4"
-                  className="w-full px-4 py-2 rounded-lg border dark:bg-gray-800 dark:border-gray-700"
+                  className="w-full px-4 py-2 rounded-lg border dark:bg-gray-700 dark:border-gray-600
+                    focus:ring-2 focus:ring-violet-500 focus:border-transparent
+                    transition duration-150 ease-in-out resize-none"
                   required
+                  disabled={loading}
                 ></textarea>
               </div>
+              
               <button
                 type="submit"
-                className="w-full py-3 bg-gradient-to-r from-violet-500 to-teal-500 text-white rounded-lg hover:opacity-90"
+                disabled={loading}
+                className="w-full py-3 bg-gradient-to-r from-violet-500 to-teal-500 text-white rounded-lg
+                  hover:opacity-90 transition-opacity duration-150 ease-in-out
+                  disabled:opacity-50 disabled:cursor-not-allowed
+                  flex items-center justify-center"
               >
-                Envoyer
+                {loading ? (
+                  <span className="inline-block animate-spin mr-2">⌛</span>
+                ) : null}
+                {loading ? t('contact.form.sending') : t('contact.form.submit')}
               </button>
             </motion.form>
           </div>
         </div>
       </div>
+
+      {/* Toast pour les notifications */}
+      {showToast && (
+        <Toast
+          message={toastMessage}
+          type={toastType}
+          onClose={() => setShowToast(false)}
+        />
+      )}
     </div>
   );
 };

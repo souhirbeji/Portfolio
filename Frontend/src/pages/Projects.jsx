@@ -3,21 +3,23 @@ import { motion } from 'framer-motion';
 import ProjectCard from '../components/ProjectCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProjects } from '../redux/Slices/Projectthunk';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Projects = () => {
   const [filter, setFilter] = useState('all');
   const dispatch = useDispatch();
   const { projects, loading, error } = useSelector(state => state.projects);
+  const { t } = useLanguage();
 
   useEffect(() => {
     dispatch(fetchProjects());
   }, [dispatch]);
 
   const categories = [
-    { id: 'all', name: 'Tous' },
-    { id: 'frontend', name: 'Frontend' },
-    { id: 'fullstack', name: 'Full Stack' },
-    { id: 'mobile', name: 'Mobile' }
+    { id: 'all', name: t('projects.categories.all') },
+    { id: 'frontend', name: t('projects.categories.frontend') },
+    { id: 'fullstack', name: t('projects.categories.fullstack') },
+    { id: 'mobile', name: t('projects.categories.mobile') }
   ];
 
   const filteredProjects = projects ? (filter === 'all'
@@ -33,10 +35,10 @@ const Projects = () => {
           className="text-center mb-12"
         >
           <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-violet-500 to-teal-500 bg-clip-text text-transparent">
-            Mes Projets
+            {t('projects.title')}
           </h1>
           <p className="text-gray-600 dark:text-gray-300">
-            Découvrez une sélection de mes réalisations
+            {t('projects.subtitle')}
           </p>
         </motion.div>
 
@@ -58,21 +60,27 @@ const Projects = () => {
           </div>
         </div>
 
-        <motion.div
-          layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          {filteredProjects.map((project, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-            >
-              <ProjectCard project={project} />
-            </motion.div>
-          ))}
-        </motion.div>
+        {loading ? (
+          <p>{t('projects.loading')}</p>
+        ) : error ? (
+          <p>{t('projects.error')} {error}</p>
+        ) : (
+          <motion.div
+            layout
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            {filteredProjects.map((project, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <ProjectCard project={project} />
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
       </div>
     </div>
   );

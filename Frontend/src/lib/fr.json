@@ -1,0 +1,268 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "projects": "Projets",
+    "about": "À propos",
+    "contact": "Contact",
+    "dashboard": "Tableau de bord"
+  },
+  "dashboard": {
+    "title": "Tableau de bord du Portfolio",
+    "subtitle": "Gérez votre contenu et suivez vos statistiques en temps réel",
+    "stats": {
+      "totalProjects": "Total Projets",
+      "totalSkills": "Compétences",
+      "experiences": "Expériences",
+      "profileViews": "Vues du profil"
+    },
+    "sections": {
+      "overview": "Aperçu",
+      "skills": "Compétences",
+      "projects": "Projets",
+      "experiences": "Expériences",
+      "messages": "Messages"
+    },
+    "charts": {
+      "skillsOverview": "Aperçu des compétences",
+      "projectDistribution": "Distribution des projets",
+      "recentActivities": "Activités récentes",
+      "technologiesUsage": "Utilisation des technologies"
+    },
+    "actions": {
+      "logout": "Déconnexion",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "add": "Ajouter",
+      "cancel": "Annuler",
+      "sending": "Envoi en cours...",
+      "send": "Envoyer"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "Créons ensemble votre présence numérique",
+      "subtitle": "Développeuse Full Stack et data analyste passionnée par les technologies innovantes",
+      "cta": {
+        "contact": "Me Contacter",
+        "projects": "Voir mes Projets"
+      }
+    },
+    "featuredProjects": {
+      "title": "Projets en Vedette",
+      "subtitle": "Découvrez quelques-unes de mes réalisations récentes",
+      "viewMore": "En savoir plus"
+    },
+    "services": {
+      "title": "Mes Services",
+      "subtitle": "Des solutions adaptées à vos besoins",
+      "items": {
+        "webdev": {
+          "title": "Développement Web",
+          "description": "Création d'applications web modernes et réactives"
+        },
+        "dataAnalysis": {
+          "title": "Data Analyse",
+          "description": "Extraction, transformation et visualisation des données pour optimiser la prise de décision"
+        },
+        "ai": {
+          "title": "IA / Machine Learning",
+          "description": "Développement de modèles intelligents pour automatiser les processus"
+        }
+      }
+    },
+    "cta": {
+      "title": "Vous cherchez un stagiaire motivé et passionné ?",
+      "subtitle": "Vous avez trouvé la bonne personne ! Contactez-moi pour concrétiser votre projet !",
+      "button": "Contactez-moi"
+    }
+  },
+  "projects": {
+    "title": "Mes Projets",
+    "subtitle": "Découvrez une sélection de mes réalisations",
+    "categories": {
+      "all": "Tous",
+      "frontend": "Frontend",
+      "fullstack": "Full Stack",
+      "mobile": "Mobile"
+    },
+    "loading": "Chargement des projets...",
+    "error": "Erreur lors du chargement des projets:"
+  },
+  "footer": {
+    "description": "Développeuse Full Stack et data analyste passionnée par les technologies innovantes",
+    "quickLinks": "Liens Rapides",
+    "followMe": "Me Suivre",
+    "rights": "Tous droits réservés",
+    "links": {
+      "portfolio": "Portfolio",
+      "about": "À propos",
+      "contact": "Contact"
+    }
+  },
+  "about": {
+    "title": "À Propos de Moi",
+    "subtitle": "Passionnée par la technologie, je transforme vos idées en réalité", 
+    "technicalSkills": {
+      "title": "Compétences Techniques",
+      "loading": "Chargement des compétences..."
+    },
+    "passions": {
+      "title": "Mes Passions",
+      "anime": {
+        "title": "Anime & Manga",
+        "description": "Passionné par la culture japonaise et les animes",
+        "favorites": "Favoris"
+      },
+      "philosophy": {
+        "title": "Philosophie",
+        "description": "La philosophie m'aide à développer un esprit critique",
+        "interests": "Centres d'intérêt"
+      },
+      "sport": {
+        "title": "Sport",
+        "description": "Le sport est essentiel pour maintenir un équilibre",
+        "activities": "Activités"
+      }
+    },
+    "collaboration": {
+      "title": "Envie de collaborer ?",
+      "subtitle": "Je suis toujours ouvert aux nouvelles opportunités et aux projets intéressants",
+      "cta": "Me Contacter"
+    }
+  },
+  "contact": {
+    "title": "Contactez-moi",
+    "subtitle": "Vous avez un projet en tête ? Je serais ravi d'en discuter avec vous",
+    "form": {
+      "name": "Nom",
+      "email": "Email",
+      "message": "Message",
+      "submit": "Envoyer",
+      "sending": "Envoi en cours...",
+      "success": "Votre message a été envoyé avec succès. Je vous répondrai dans les plus brefs délais.",
+      "error": "Une erreur s'est produite lors de l'envoi de votre message. Veuillez réessayer plus tard."
+    },
+    "info": {
+      "title": "Coordonnées",
+      "email": "Email",
+      "location": "Localisation",
+      "phone": "Téléphone"
+    },
+    "social": {
+      "title": "Réseaux Sociaux",
+      "github": "GitHub",
+      "linkedin": "LinkedIn"
+    }
+  },
+  "services": {
+    "web": {
+      "title": "Développement Web",
+      "description": "Applications web modernes et réactives avec les dernières technologies"
+    },
+    "data": {
+      "title": "Analyse de Données",
+      "description": "Transformation et visualisation des données pour une meilleure prise de décision"
+    },
+    "ai": {
+      "title": "Intelligence Artificielle",
+      "description": "Solutions IA sur mesure pour automatiser vos processus"
+    }
+  },
+  "career": {
+    "title": "Parcours Professionnel",
+    "experience": "Expérience",
+    "education": "Formation",
+    "skills": "Compétences"
+  },
+  "discussion": {
+    "title": "Discutons de votre Projet",
+    "subtitle": "Prenons un moment pour échanger sur vos besoins",
+    "process": {
+      "step1": "Premier Contact",
+      "step2": "Analyse des Besoins",
+      "step3": "Proposition",
+      "step4": "Réalisation"
+    }
+  },
+  "experience": {
+    "title": "Parcours Professionnel",
+    "subtitle": "Mon parcours professionnel reflète ma passion pour le développement web et mon engagement constant pour l'innovation",
+    "loading": "Chargement des expériences...",
+    "error": "Erreur lors du chargement :",
+    "timeline": {
+      "company": "Entreprise",
+      "location": "Lieu",
+      "period": "Période",
+      "achievements": "Réalisations",
+      "technologies": "Technologies utilisées"
+    },
+    "cta": {
+      "title": "Discutons de votre projet",
+      "button": "Me contacter"
+    }
+  },
+  "passions": {
+    "title": "Mes Passions",
+    "categories": {
+      "anime": {
+        "title": "Anime & Manga",
+        "description": "Passionné par la culture japonaise et les animes",
+        "favorites": "Mes favoris",
+        "quote": "Le voyage est plus important que la destination",
+        "interests": {
+          "title": "Centres d'intérêt",
+          "items": [
+            "Animation japonaise",
+            "Culture japonaise",
+            "Character design",
+            "Narration visuelle"
+          ]
+        }
+      },
+      "philosophy": {
+        "title": "Philosophie",
+        "description": "La philosophie m'aide à développer un esprit critique",
+        "interests": {
+          "title": "Centres d'intérêt",
+          "items": [
+            "Existentialisme",
+            "Stoïcisme",
+            "Philosophie de l'esprit",
+            "Éthique"
+          ]
+        },
+        "activities": {
+          "title": "Activités",
+          "items": [
+            "Lecture d'ouvrages philosophiques",
+            "Participation à des débats",
+            "Rédaction de réflexions",
+            "Méditation"
+          ]
+        }
+      },
+      "sport": {
+        "title": "Sport",
+        "description": "Le sport est essentiel pour maintenir un équilibre",
+        "activities": {
+          "title": "Activités",
+          "items": [
+            "Musculation",
+            "Course à pied",
+            "Yoga",
+            "Sports collectifs"
+          ]
+        },
+        "goals": {
+          "title": "Objectifs",
+          "items": [
+            "Amélioration continue",
+            "Discipline",
+            "Bien-être",
+            "Équilibre mental"
+          ]
+        }
+      }
+    }
+  }
+}

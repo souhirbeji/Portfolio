@@ -7,10 +7,12 @@ import { SiMyanimelist } from 'react-icons/si';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSkills } from '../redux/Slices/SkillThunk';
-
+import { useLanguage } from '../contexts/LanguageContext';
+import { Link } from 'react-router-dom';
 const About = () => {
   const dispatch = useDispatch();
   const { skills, loading: skillsLoading, error: skillsError } = useSelector(state => state.skills);
+  const { t } = useLanguage();
 
   useEffect(() => {
     dispatch(fetchSkills());
@@ -32,27 +34,40 @@ const About = () => {
 
   const passions = {
     anime: {
-      title: "Anime & Manga",
+      title: t('passions.categories.anime.title'),
       icon: <SiMyanimelist className="text-4xl text-blue-600" />,
-      description: "Passionné par la culture japonaise et les animes, j'apprécie particulièrement les œuvres qui mélangent action et réflexion philosophique.",
+      description: t('passions.categories.anime.description'),
       favorites: ["Attack on Titan", "Death Note", "Full Metal Alchemist", "Monster"],
-      quote: "Le voyage est plus important que la destination."
+      quote: t('passions.categories.anime.quote')
     },
     philosophy: {
-      title: "Philosophie",
+      title: t('passions.categories.philosophy.title'),
       icon: <FaBookReader className="text-4xl text-purple-600" />,
-      description: "La philosophie m'aide à développer un esprit critique et à voir le monde sous différents angles.",
+      description: t('passions.categories.philosophy.description'),
       interests: ["Existentialisme", "Stoïcisme", "Philosophie de l'esprit"],
       philosophers: ["Albert Camus", "Friedrich Nietzsche", "Marcus Aurelius"]
     },
     sport: {
-      title: "Sport",
+      title: t('passions.categories.sport.title'),
       icon: <FaDumbbell className="text-4xl text-red-600" />,
-      description: "Le sport est essentiel pour maintenir un équilibre entre corps et esprit.",
+      description: t('passions.categories.sport.description'),
       activities: ["Musculation", "Course à pied", "Yoga"],
       goals: ["Amélioration continue", "Discipline", "Bien-être"]
     }
   };
+
+  const renderPassionItems = (items, className) => (
+    <div className="flex flex-wrap gap-2">
+      {items.map((item, i) => (
+        <span
+          key={i}
+          className={`px-3 py-1 ${className} rounded-full text-sm`}
+        >
+          {item}
+        </span>
+      ))}
+    </div>
+  );
 
   return (
     <div className="min-h-screen pt-24 pb-16">
@@ -63,13 +78,12 @@ const About = () => {
           className="max-w-7xl mx-auto" // Changed from max-w-4xl to max-w-7xl for wider content
         >
           <h1 className="text-4xl font-bold mb-8 bg-gradient-to-r from-violet-500 to-teal-500 bg-clip-text text-transparent text-center">
-            À Propos de Moi
+            {t('about.title')}
           </h1>
 
           <div className="mb-8">
             <p className="text-lg text-gray-600 dark:text-gray-300 text-center max-w-3xl mx-auto">
-              Passionné par le développement web depuis plus de 5 ans, je crée des solutions numériques 
-              innovantes qui allient performance et expérience utilisateur exceptionnelle.
+              {t('about.subtitle')}
             </p>
           </div>
 
@@ -81,10 +95,10 @@ const About = () => {
               animate={{ opacity: 1, x: 0 }}
               className="space-y-6"
             >
-              <h2 className="text-2xl font-bold mb-6">Compétences Techniques</h2>
+              <h2 className="text-2xl font-bold mb-6">{t('about.technicalSkills.title')}</h2>
               <div className="grid gap-6">
                 {skillsLoading ? (
-                  <p>Loading skills...</p>
+                  <p>{t('about.technicalSkills.loading')}</p>
                 ) : skillsError ? (
                   <p>Error: {skillsError}</p>
                 ) : (
@@ -117,7 +131,7 @@ const About = () => {
               animate={{ opacity: 1, x: 0 }}
               className="space-y-6"
             >
-              <h2 className="text-2xl font-bold mb-6">Mes Passions</h2>
+              <h2 className="text-2xl font-bold mb-6">{t('about.passions.title')}</h2>
               <div className="grid gap-6">
                 {Object.entries(passions).map(([key, passion], index) => (
                   <motion.div
@@ -161,33 +175,31 @@ const About = () => {
 
                       {passion.interests && (
                         <div className="mb-4">
-                          <h4 className="font-semibold mb-2">Centres d'intérêt :</h4>
-                          <div className="flex flex-wrap gap-2">
-                            {passion.interests.map((item, i) => (
-                              <span
-                                key={i}
-                                className="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-600 dark:text-purple-300 rounded-full text-sm"
-                              >
-                                {item}
-                              </span>
-                            ))}
-                          </div>
+                          <h4 className="font-semibold mb-2">{t(`passions.categories.${key}.interests.title`)}</h4>
+                          {renderPassionItems(
+                            t(`passions.categories.${key}.interests.items`),
+                            "bg-violet-100 dark:bg-violet-900 text-violet-600 dark:text-violet-300"
+                          )}
                         </div>
                       )}
 
                       {passion.activities && (
                         <div className="mb-4">
-                          <h4 className="font-semibold mb-2">Activités :</h4>
-                          <div className="flex flex-wrap gap-2">
-                            {passion.activities.map((item, i) => (
-                              <span
-                                key={i}
-                                className="px-3 py-1 bg-red-100 dark:bg-red-900 text-red-600 dark:text-red-300 rounded-full text-sm"
-                              >
-                                {item}
-                              </span>
-                            ))}
-                          </div>
+                          <h4 className="font-semibold mb-2">{t(`passions.categories.${key}.activities.title`)}</h4>
+                          {renderPassionItems(
+                            t(`passions.categories.${key}.activities.items`),
+                            "bg-teal-100 dark:bg-teal-900 text-teal-600 dark:text-teal-300"
+                          )}
+                        </div>
+                      )}
+
+                      {passion.goals && (
+                        <div className="mb-4">
+                          <h4 className="font-semibold mb-2">{t(`passions.categories.${key}.goals.title`)}</h4>
+                          {renderPassionItems(
+                            t(`passions.categories.${key}.goals.items`),
+                            "bg-amber-100 dark:bg-amber-900 text-amber-600 dark:text-amber-300"
+                          )}
                         </div>
                       )}
 
@@ -210,16 +222,16 @@ const About = () => {
             className="mt-12"
           >
             <div className="bg-gradient-to-r from-violet-100 to-teal-100 dark:from-violet-900 dark:to-teal-900 rounded-2xl p-8 text-center">
-              <h2 className="text-2xl font-bold mb-4">Envie de collaborer ?</h2>
+              <h2 className="text-2xl font-bold mb-4">{t('about.collaboration.title')}</h2>
               <p className="text-gray-600 dark:text-gray-300 mb-6">
-                Je suis toujours ouvert aux nouvelles opportunités et aux projets intéressants.
+                {t('about.collaboration.subtitle')}
               </p>
-              <a
-                href="/contact"
+              <Link
+                to="/contact"
                 className="inline-block px-6 py-3 bg-violet-500 text-white rounded-full hover:bg-violet-600 transition-colors"
               >
-                Me Contacter
-              </a>
+                {t('about.collaboration.cta')}
+              </Link>
             </div>
           </motion.div>
         </motion.div>

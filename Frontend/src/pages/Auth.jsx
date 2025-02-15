@@ -10,15 +10,22 @@ const Auth = () => {
   const [username, setUserName] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+  const [toastType, setToastType] = useState('success');
   const { isAuthenticated, loading, error } = useSelector((state) => state.auth); // recupère les données du store
   // handle submit recupére et voir si les champs sont faites ou pas voir si les données du formulaire et les envoie au serveur
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (isLogin) {
       dispatch(login({ email, password }));
-    } else {
-      dispatch(register({ username, email, password }));
     }
+    // } else {
+    //   // dispatch(register({ username, email, password }));
+    //   setShowToast(true);
+    //   setToastMessage("L'inscription est désactivée pour le moment");
+    //   setToastType('info'); 
+    // }
   };
 
 useEffect(() => {
@@ -45,7 +52,7 @@ useEffect(() => {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          {!isLogin && (
+          {/* {!isLogin && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
@@ -62,7 +69,7 @@ useEffect(() => {
                 required={!isLogin}
               />
             </motion.div>
-          )}
+          )} */}
 
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -107,15 +114,23 @@ useEffect(() => {
             </p>
           )}
         </form>
-        <div className="mt-6 text-center">
+        {/* <div className="mt-6 text-center">
           <button
             onClick={() => setIsLogin(!isLogin)}
             className="text-violet-500 hover:text-violet-600 dark:text-violet-400"
           >
             {isLogin ? "Don't have an account? Sign up" : 'Already have an account? Sign in'}
           </button>
-        </div>
+        </div> */}
       </motion.div>
+      {showToast && (
+        <Toast
+          message={toastMessage}
+          type={toastType}
+          onClose={() => setShowToast(false)}
+          duration={3000}
+        />
+      )}
     </div>
   );
 };

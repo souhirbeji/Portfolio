@@ -1,13 +1,15 @@
 import { motion } from 'framer-motion';
-import { FaBriefcase, FaCalendar, FaMapMarkerAlt, FaMedal, FaCode, FaLightbulb, FaUsers } from 'react-icons/fa';
+import { FaBriefcase, FaCalendar, FaMapMarkerAlt, FaMedal, FaLightbulb } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchExperiences } from '../redux/Slices/ExperienceThunk';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Experience = () => {
   const dispatch = useDispatch();
   const { experiences, loading, error } = useSelector(state => state.experiences);
+  const { t } = useLanguage();
 
   useEffect(() => {
     dispatch(fetchExperiences());
@@ -29,11 +31,10 @@ const Experience = () => {
         >
           <motion.div className="text-center mb-16" {...fadeInUp}>
             <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-violet-500 to-teal-500 bg-clip-text text-transparent">
-              Parcours Professionnel
+              {t('experience.title')}
             </h1>
             <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              Mon parcours professionnel reflète ma passion pour le développement web 
-              et mon engagement constant pour l'innovation et l'excellence technique.
+              {t('experience.subtitle')}
             </p>
           </motion.div>
 
@@ -44,9 +45,9 @@ const Experience = () => {
             {/* Experiences */}
             <div className="space-y-12">
               {loading ? (
-                <p>Loading experiences...</p>
+                <p>{t('experience.loading')}</p>
               ) : error ? (
-                <p>Error: {error}</p>
+                <p>{t('experience.error')} {error}</p>
               ) : (
                 experiences.map((exp, index) => (
                   <motion.div
@@ -76,11 +77,11 @@ const Experience = () => {
                       <div className="flex flex-wrap gap-4 text-sm text-gray-600 dark:text-gray-300 mb-4">
                         <span className="flex items-center gap-1">
                           <FaMapMarkerAlt />
-                          {exp.company}, {exp.location}
+                          {t('experience.timeline.company')}: {exp.company}
                         </span>
                         <span className="flex items-center gap-1">
                           <FaCalendar />
-                          {exp.period}
+                          {t('experience.timeline.period')}: {exp.period}
                         </span>
                       </div>
 
@@ -90,20 +91,24 @@ const Experience = () => {
                       </p>
 
                       {/* Technologies */}
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {exp.technologies.map((tech, i) => (
-                          <span
-                            key={i}
-                            className={`px-3 py-1 bg-${exp.color}-100 dark:bg-${exp.color}-900 
-                              text-${exp.color}-600 dark:text-${exp.color}-300 rounded-full text-sm`}
-                          >
-                            {tech}
-                          </span>
-                        ))}
+                      <div className="mb-4">
+                        <h4 className="text-sm font-semibold mb-2">{t('experience.timeline.technologies')}:</h4>
+                        <div className="flex flex-wrap gap-2">
+                          {exp.technologies.map((tech, i) => (
+                            <span
+                              key={i}
+                              className={`px-3 py-1 bg-${exp.color}-100 dark:bg-${exp.color}-900 
+                                text-${exp.color}-600 dark:text-${exp.color}-300 rounded-full text-sm`}
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
                       </div>
 
                       {/* Achievements */}
                       <div className="space-y-2">
+                        <h4 className="text-sm font-semibold mb-2">{t('experience.timeline.achievements')}:</h4>
                         {exp.achievements.map((achievement, i) => (
                           <motion.div
                             key={i}
@@ -137,7 +142,7 @@ const Experience = () => {
               to="/contact"
               className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-violet-500 to-teal-500 text-white rounded-full hover:opacity-90 transition-opacity"
             >
-              Discutons de votre projet
+              {t('experience.cta.title')}
               <FaLightbulb className="ml-2" />
             </Link>
           </motion.div>

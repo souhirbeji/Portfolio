@@ -1,33 +1,41 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { FaArrowRight, FaGithub, FaLinkedin, FaCode, FaLightbulb, FaRocket } from 'react-icons/fa';
+import { FaArrowRight, FaGithub, FaLinkedin, FaCode, FaLightbulb, FaRocket, FaChartBar, FaBrain } from 'react-icons/fa';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProjects } from '../redux/Slices/Projectthunk';
+import { useLanguage } from '../contexts/LanguageContext';
+import { incrementViewCount } from '../redux/Slices/ViewSlice';
 
 const Home = () => {
   const dispatch = useDispatch();
   const { projects, loading, error } = useSelector(state => state.projects);
+  const { t } = useLanguage();
 
   useEffect(() => {
     dispatch(fetchProjects());
+    // Incrémenter le compteur uniquement lors de la visite de la page d'accueil
+    dispatch(incrementViewCount());
   }, [dispatch]);
 
   const services = [
     {
       icon: <FaCode className="text-4xl text-violet-500" />,
-      title: "Développement Web",
-      description: "Création d'applications web modernes et réactives"
+      title: t('home.services.items.webdev.title'),
+      type: 'webdev',
+      description: t('home.services.items.webdev.description')
     },
     {
-      icon: <FaLightbulb className="text-4xl text-teal-500" />,
-      title: "UI/UX Design",
-      description: "Design d'interfaces utilisateur intuitives"
+      icon: <FaChartBar className="text-4xl text-teal-500" />,  
+      title: t('home.services.items.dataAnalysis.title'),
+      type: 'dataAnalysis',
+      description: t('home.services.items.dataAnalysis.description')
     },
     {
-      icon: <FaRocket className="text-4xl text-purple-500" />,
-      title: "Optimisation",
-      description: "Amélioration des performances et SEO"
+      icon: <FaBrain className="text-4xl text-purple-500" />,  
+      title: t('home.services.items.ai.title'),
+      type: 'ai',
+      description: t('home.services.items.ai.description')
     }
   ];
 
@@ -50,7 +58,7 @@ const Home = () => {
               className="text-6xl md:text-7xl font-bold mb-6"
             >
               <span className="bg-gradient-to-r from-violet-500 to-teal-500 bg-clip-text text-transparent">
-                Créons ensemble votre présence numérique
+                {t('home.hero.title')}
               </span>
             </motion.h1>
 
@@ -60,7 +68,7 @@ const Home = () => {
               transition={{ delay: 0.2 }}
               className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8"
             >
-              Développeur Full Stack spécialisé dans la création d'applications web modernes et performantes.
+                {t('home.hero.subtitle')}
             </motion.p>
 
             <motion.div
@@ -73,14 +81,14 @@ const Home = () => {
                 to="/contact"
                 className="group px-8 py-3 bg-gradient-to-r from-violet-500 to-teal-500 text-white rounded-full hover:opacity-90 flex items-center"
               >
-                Me Contacter
+                {t('home.hero.cta.contact')}
                 <FaArrowRight className="ml-2 transform group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
                 to="/projects"
                 className="px-8 py-3 border-2 border-violet-500 text-violet-500 rounded-full hover:bg-violet-50 dark:hover:bg-violet-900/20"
               >
-                Voir mes Projets
+                {t('home.hero.cta.projects')}
               </Link>
             </motion.div>
           </div>
@@ -114,18 +122,18 @@ const Home = () => {
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Projets en Vedette
+              {t('home.featuredProjects.title')}
             </h2>
             <p className="text-gray-600 dark:text-gray-300">
-              Découvrez quelques-unes de mes réalisations récentes
+              {t('home.featuredProjects.subtitle')}
             </p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {loading ? (
-              <p>Loading projects...</p>
+              <p>{t('projects.loading')}</p>
             ) : error ? (
-              <p>Error: {error}</p>
+              <p>{t('projects.error')} {error}</p>
             ) : (
               featuredProjects.map((project, index) => (
                 <motion.div
@@ -160,7 +168,7 @@ const Home = () => {
                       to={project.link}
                       className="inline-flex items-center text-violet-500 hover:text-violet-600"
                     >
-                      En savoir plus
+                      {t('home.featuredProjects.viewMore')}
                       <FaArrowRight className="ml-2" />
                     </Link>
                   </div>
@@ -181,10 +189,10 @@ const Home = () => {
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Mes Services
+              {t('home.services.title')}
             </h2>
             <p className="text-gray-600 dark:text-gray-300">
-              Des solutions adaptées à vos besoins
+              {t('home.services.subtitle')}
             </p>
           </motion.div>
 
@@ -199,9 +207,9 @@ const Home = () => {
                 className="text-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg"
               >
                 <div className="mb-4">{service.icon}</div>
-                <h3 className="text-xl font-bold mb-2">{service.title}</h3>
+                <h3 className="text-xl font-bold mb-2">{t(`home.services.items.${service.type}.title`)}</h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  {service.description}
+                  {t(`home.services.items.${service.type}.description`)}
                 </p>
               </motion.div>
             ))}
@@ -219,16 +227,16 @@ const Home = () => {
             className="max-w-2xl mx-auto"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Prêt à Démarrer Votre Projet ?
+              {t('home.cta.title')}
             </h2>
             <p className="text-white/90 mb-8">
-              Discutons de vos idées et transformons-les en réalité.
+              {t('home.cta.subtitle')}
             </p>
             <Link
               to="/contact"
               className="inline-block px-8 py-3 bg-white text-violet-500 rounded-full hover:bg-gray-100 transition-colors"
             >
-              Contactez-moi
+              {t('home.cta.button')}
             </Link>
           </motion.div>
         </div>
