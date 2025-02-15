@@ -4,13 +4,21 @@ const morgan = require('morgan');
 const helmet = require('helmet');
 const compression = require('compression');
 const connectDB = require('./config/db');
+const rateLimit = require('express-rate-limit');
+const mongoSanitize = require('express-mongo-sanitize');
+const hpp = require('hpp');
 require('dotenv').config();
-
 // Initialize express app
 const app = express();
 
 // Connect to MongoDB
 connectDB();
+
+// Rate limiting
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100 // limite chaque IP à 100 requêtes par fenêtre
+});
 
 // Middleware
 app.use(cors());
@@ -19,6 +27,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 app.use(helmet());
 app.use(compression());
+app.use(limiter);
+app.use(mongoSanitize()); // Prévention des injections NoSQL
+app.use(hpp()); // Protection contre la pollution des paramètres HTTP
 
 // Basic route
 app.get('/', (req, res) => {
@@ -30,6 +41,8 @@ app.use('/auth', require('./routes/auth'));
 app.use('/projects', require('./routes/projects'));
 app.use('/skills', require('./routes/skills'));
 app.use('/experiences', require('./routes/experiences'));
+app.use('/messages', require('./routes/messages'));
+app.use('/views', require('./routes/viewRoutes')); // Nouvelle route
 
 // Error handling middleware
 app.use((err, req, res, next) => {

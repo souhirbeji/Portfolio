@@ -2,19 +2,43 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
+// Objet pour suivre les tentatives de connexion
+const loginAttempts = new Map();
+
+const MAX_LOGIN_ATTEMPTS = 5;
+const LOCK_TIME = 15 * 60 * 1000; // 15 minutes en millisecondes
+
+const validatePassword = (password) => {
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    return regex.test(password);
+};
+
 exports.register = async (req, res) => {
     try {
         const { username, email, password } = req.body;
-        let user = await User.findOne({ email });
-        
-        if (user) {
-            return res.status(400).json({ message: 'User already exists' });
+
+        // Validation renforcée
+        if (!validatePassword(password)) {
+            return res.status(400).json({
+                message: 'Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial'
+            });
         }
 
-        const salt = await bcrypt.genSalt(10);
+        // Vérification email et username
+        const emailExists = await User.findOne({ email });
+        const usernameExists = await User.findOne({ username });
+
+        if (emailExists || usernameExists) {
+            return res.status(400).json({ 
+                message: 'Nom d\'utilisateur ou email déjà utilisé',
+                field: emailExists ? 'email' : 'username'
+            });
+        }
+
+        const salt = await bcrypt.genSalt(12); // Augmentation à 12 rounds
         const hashedPassword = await bcrypt.hash(password, salt);
 
-        user = new User({
+        const user = new User({
             username,
             email,
             password: hashedPassword
@@ -26,42 +50,74 @@ exports.register = async (req, res) => {
             user: { id: user.id }
         };
 
-        jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' }, (err, token) => {
-            if (err) throw err;
-            res.json({ token });
-        });
+        jwt.sign(
+            payload, 
+            process.env.JWT_SECRET, 
+            { expiresIn: '30d', algorithm: 'HS256' }, 
+            (err, token) => {
+                if (err) throw err;
+                res.json({ token });
+            }
+        );
     } catch (err) {
         console.error(err.message);
-        res.status(500).send('Server error');
+        res.status(500).json({ message: 'Erreur serveur' });
     }
 };
 
 exports.login = async (req, res) => {
     try {
         const { email, password } = req.body;
+
+        // Vérification des tentatives de connexion
+        const userAttempts = loginAttempts.get(email) || { count: 0, timestamp: Date.now() };
+        
+        if (userAttempts.count >= MAX_LOGIN_ATTEMPTS && 
+            Date.now() - userAttempts.timestamp < LOCK_TIME) {
+            return res.status(429).json({ 
+                message: 'Compte temporairement bloqué. Veuillez réessayer plus tard.' 
+            });
+        }
+
         const user = await User.findOne({ email });
 
         if (!user) {
-            return res.status(400).json({ message: 'Incorrect Password' });
+            loginAttempts.set(email, {
+                count: userAttempts.count + 1,
+                timestamp: Date.now()
+            });
+            return res.status(400).json({ message: 'Identifiants invalides' });
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
 
         if (!isMatch) {
-            return res.status(400).json({ message: 'Incorrect Password'  });
+            loginAttempts.set(email, {
+                count: userAttempts.count + 1,
+                timestamp: Date.now()
+            });
+            return res.status(400).json({ message: 'Identifiants invalides' });
         }
+
+        // Réinitialisation des tentatives en cas de succès
+        loginAttempts.delete(email);
 
         const payload = {
             user: { id: user.id }
         };
 
-        jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' }, (err, token) => {
-            if (err) throw err;
-            res.json({ token });
-        });
+        jwt.sign(
+            payload, 
+            process.env.JWT_SECRET, 
+            { expiresIn: '1h', algorithm: 'HS256' }, 
+            (err, token) => {
+                if (err) throw err;
+                res.json({ token });
+            }
+        );
     } catch (err) {
         console.error(err.message);
-        res.status(500).send('Server error');
+        res.status(500).json({ message: 'Erreur serveur' });
     }
 };
 
