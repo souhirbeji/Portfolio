@@ -21,7 +21,19 @@ const limiter = rateLimit({
 });
 
 // Middleware
-app.use(cors({ origin: 'https://portfolio-uve2.vercel.app' }));
+// Configuration de CORS
+const allowedOrigins = [
+    'https://zaanndou-frontend.vercel.app', // Frontend en production
+    'http://localhost:5173' // Pour le développement local avec Vite
+  ];
+  
+  app.use(cors({
+    origin: allowedOrigins, 
+    credentials: true, // Autorise l'envoi des cookies si nécessaire
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Autoriser certaines méthodes HTTP
+    allowedHeaders: ['Content-Type', 'Authorization'], // Autoriser certains headers
+  }));
+  
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
