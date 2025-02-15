@@ -21,7 +21,7 @@ const limiter = rateLimit({
 });
 
 // Middleware
-app.use(cors ({ origin: 'https://portfolio-uve2.vercel.app/' }));
+app.use(cors({ origin: 'https://portfolio-uve2.vercel.app' }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
