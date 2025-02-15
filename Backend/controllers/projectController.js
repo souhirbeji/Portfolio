@@ -2,7 +2,7 @@ const Project = require('../models/Project');
 
 exports.getAllProjects = async (req, res) => {
     try {
-        const projects = await Project.find({ userId: req.user.id });
+        const projects = await Project.find().sort({ startDate: -1 });
         res.json(projects);
     } catch (err) {
         console.error(err.message);

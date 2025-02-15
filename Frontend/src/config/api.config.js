@@ -1,5 +1,5 @@
 export const API_CONFIG = {
-  BASE_URL: 'https://backend-4ktnwhrvz-souhirbejis-projects.vercel.app',
+  BASE_URL: 'https://backend-pink-two.vercel.app',
   ENDPOINTS: {
     AUTH: {
       LOGIN: '/auth/login',
