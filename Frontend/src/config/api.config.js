@@ -1,5 +1,5 @@
 export const API_CONFIG = {
-  BASE_URL: 'https://backend-q60xyi111-souhirbejis-projects.vercel.app',
+  BASE_URL: 'https://backend-4ktnwhrvz-souhirbejis-projects.vercel.app',
   ENDPOINTS: {
     AUTH: {
       LOGIN: '/auth/login',
