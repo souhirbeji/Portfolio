@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchSkills } from '../redux/Slices/SkillThunk';
 import { useLanguage } from '../contexts/LanguageContext';
 import { Link } from 'react-router-dom';
+import { ICONS } from '../utils/constants';
+
 const About = () => {
   const dispatch = useDispatch();
   const { skills, loading: skillsLoading, error: skillsError } = useSelector(state => state.skills);
@@ -31,6 +33,15 @@ const About = () => {
     acc[skill.category].push(skill);
     return acc;
   }, {}) : {};
+
+  const getIconComponent = (iconName, category) => {
+    const iconData = ICONS[category]?.find(i => i.name === iconName);
+    if (iconData) {
+      const IconComponent = iconData.icon;
+      return <IconComponent className={`text-xl text-${iconData.color}`} />;
+    }
+    return null;
+  };
 
   const passions = {
     anime: {
@@ -75,147 +86,148 @@ const About = () => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="max-w-7xl mx-auto" // Changed from max-w-4xl to max-w-7xl for wider content
+          className="max-w-7xl mx-auto"
         >
+          {/* Header section - unchanged */}
           <h1 className="text-4xl font-bold mb-8 bg-gradient-to-r from-violet-500 to-teal-500 bg-clip-text text-transparent text-center">
             {t('about.title')}
           </h1>
 
-          <div className="mb-8">
+          <div className="mb-12">
             <p className="text-lg text-gray-600 dark:text-gray-300 text-center max-w-3xl mx-auto">
-              {t('about.subtitle')}
+              Passionate about Web Development, Data and AI, I create innovative digital solutions
             </p>
           </div>
 
-          {/* Two-column layout */}
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Left column - Technical Skills */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="space-y-6"
-            >
-              <h2 className="text-2xl font-bold mb-6">{t('about.technicalSkills.title')}</h2>
-              <div className="grid gap-6">
-                {skillsLoading ? (
-                  <p>{t('about.technicalSkills.loading')}</p>
-                ) : skillsError ? (
-                  <p>Error: {skillsError}</p>
-                ) : (
-                  Object.entries(groupedSkills).map(([category, skills]) => (
-                    <motion.div
-                      key={category}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.2 }}
-                      className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg"
-                    >
-                      <h3 className="text-xl font-semibold mb-4 text-violet-500">{capitalizeFirstLetter(category)}</h3>
-                      <ul className="space-y-4">
-                        {skills.map((skill) => (
-                          <li key={skill._id} className="flex items-center space-x-3">
-                            <span className="text-xl"><i className={`fab ${skill.icon} text-${skill.iconColor}`} /></span>
-                            <span>{skill.name}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </motion.div>
-                  ))
-                )}
-              </div>
-            </motion.div>
-
-            {/* Right column - Passions */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="space-y-6"
-            >
-              <h2 className="text-2xl font-bold mb-6">{t('about.passions.title')}</h2>
-              <div className="grid gap-6">
-                {Object.entries(passions).map(([key, passion], index) => (
+          {/* Technical Skills Section - Full width */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-16"
+          >
+            <h2 className="text-2xl font-bold mb-8">{t('about.technicalSkills.title')}</h2>
+            {skillsLoading ? (
+              <p>{t('about.technicalSkills.loading')}</p>
+            ) : skillsError ? (
+              <p>Error: {skillsError}</p>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {Object.entries(groupedSkills).map(([category, skills]) => (
                   <motion.div
-                    key={key}
+                    key={category}
                     initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.2 }}
-                    className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg relative overflow-hidden group hover:shadow-xl transition-shadow"
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                    className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow"
                   >
-                    {/* Decorative background */}
-                    <div className="absolute inset-0 opacity-5 group-hover:opacity-10 transition-opacity">
-                      <div className="absolute inset-0 bg-gradient-to-r from-violet-500 to-teal-500" />
-                    </div>
-
-                    <div className="relative">
-                      <div className="flex items-center gap-4 mb-4">
-                        {passion.icon}
-                        <h3 className="text-xl font-bold">{passion.title}</h3>
-                      </div>
-
-                      <p className="text-gray-600 dark:text-gray-300 mb-6">
-                        {passion.description}
-                      </p>
-
-                      {passion.favorites && (
-                        <div className="mb-4">
-                          <h4 className="font-semibold mb-2">Favoris :</h4>
-                          <div className="flex flex-wrap gap-2">
-                            {passion.favorites.map((item, i) => (
-                              <span
-                                key={i}
-                                className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 rounded-full text-sm"
-                              >
-                                {item}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-
-                      {passion.interests && (
-                        <div className="mb-4">
-                          <h4 className="font-semibold mb-2">{t(`passions.categories.${key}.interests.title`)}</h4>
-                          {renderPassionItems(
-                            t(`passions.categories.${key}.interests.items`),
-                            "bg-violet-100 dark:bg-violet-900 text-violet-600 dark:text-violet-300"
-                          )}
-                        </div>
-                      )}
-
-                      {passion.activities && (
-                        <div className="mb-4">
-                          <h4 className="font-semibold mb-2">{t(`passions.categories.${key}.activities.title`)}</h4>
-                          {renderPassionItems(
-                            t(`passions.categories.${key}.activities.items`),
-                            "bg-teal-100 dark:bg-teal-900 text-teal-600 dark:text-teal-300"
-                          )}
-                        </div>
-                      )}
-
-                      {passion.goals && (
-                        <div className="mb-4">
-                          <h4 className="font-semibold mb-2">{t(`passions.categories.${key}.goals.title`)}</h4>
-                          {renderPassionItems(
-                            t(`passions.categories.${key}.goals.items`),
-                            "bg-amber-100 dark:bg-amber-900 text-amber-600 dark:text-amber-300"
-                          )}
-                        </div>
-                      )}
-
-                      {passion.quote && (
-                        <div className="mt-4 italic text-gray-600 dark:text-gray-400">
-                          "{passion.quote}"
-                        </div>
-                      )}
-                    </div>
+                    <h3 className="text-xl font-semibold mb-4 text-violet-500">{capitalizeFirstLetter(category)}</h3>
+                    <ul className="space-y-4">
+                      {skills.map((skill) => (
+                        <li key={skill._id} className="flex items-center space-x-3">
+                          {getIconComponent(skill.icon, skill.category)}
+                          <span>{skill.name}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </motion.div>
                 ))}
               </div>
-            </motion.div>
-          </div>
+            )}
+          </motion.div>
 
-          {/* Contact section at the bottom */}
+          {/* Divider */}
+          <div className="w-full h-px bg-gradient-to-r from-violet-500 to-teal-500 my-16 opacity-20"></div>
+
+          {/* Passions Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-16"
+          >
+            <h2 className="text-2xl font-bold mb-8">{t('about.passions.title')}</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {Object.entries(passions).map(([key, passion], index) => (
+                <motion.div
+                  key={key}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.2 }}
+                  className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg relative overflow-hidden group hover:shadow-xl transition-shadow"
+                >
+                  {/* Decorative background */}
+                  <div className="absolute inset-0 opacity-5 group-hover:opacity-10 transition-opacity">
+                    <div className="absolute inset-0 bg-gradient-to-r from-violet-500 to-teal-500" />
+                  </div>
+
+                  <div className="relative">
+                    <div className="flex items-center gap-4 mb-4">
+                      {passion.icon}
+                      <h3 className="text-xl font-bold">{passion.title}</h3>
+                    </div>
+
+                    <p className="text-gray-600 dark:text-gray-300 mb-6">
+                      {passion.description}
+                    </p>
+
+                    {passion.favorites && (
+                      <div className="mb-4">
+                        <h4 className="font-semibold mb-2">Favoris :</h4>
+                        <div className="flex flex-wrap gap-2">
+                          {passion.favorites.map((item, i) => (
+                            <span
+                              key={i}
+                              className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 rounded-full text-sm"
+                            >
+                              {item}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {passion.interests && (
+                      <div className="mb-4">
+                        <h4 className="font-semibold mb-2">{t(`passions.categories.${key}.interests.title`)}</h4>
+                        {renderPassionItems(
+                          t(`passions.categories.${key}.interests.items`),
+                          "bg-violet-100 dark:bg-violet-900 text-violet-600 dark:text-violet-300"
+                        )}
+                      </div>
+                    )}
+
+                    {passion.activities && (
+                      <div className="mb-4">
+                        <h4 className="font-semibold mb-2">{t(`passions.categories.${key}.activities.title`)}</h4>
+                        {renderPassionItems(
+                          t(`passions.categories.${key}.activities.items`),
+                          "bg-teal-100 dark:bg-teal-900 text-teal-600 dark:text-teal-300"
+                        )}
+                      </div>
+                    )}
+
+                    {passion.goals && (
+                      <div className="mb-4">
+                        <h4 className="font-semibold mb-2">{t(`passions.categories.${key}.goals.title`)}</h4>
+                        {renderPassionItems(
+                          t(`passions.categories.${key}.goals.items`),
+                          "bg-amber-100 dark:bg-amber-900 text-amber-600 dark:text-amber-300"
+                        )}
+                      </div>
+                    )}
+
+                    {passion.quote && (
+                      <div className="mt-4 italic text-gray-600 dark:text-gray-400">
+                        "{passion.quote}"
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Contact Section - unchanged */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

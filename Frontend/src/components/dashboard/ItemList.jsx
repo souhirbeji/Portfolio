@@ -1,10 +1,22 @@
 import { motion } from 'framer-motion';
 import { FaEdit, FaTrash } from 'react-icons/fa';
+import { ICONS } from '../../utils/constants';
 
 const ItemList = ({ items, loading, onEdit, onDelete, renderItem }) => {
   if (loading) {
     return <div className="text-center py-8">Loading...</div>;
   }
+
+  const getIconComponent = (item) => {
+    if (!item.category || !item.icon) return null;
+    
+    const iconData = ICONS[item.category]?.find(i => i.name === item.icon);
+    if (iconData) {
+      const IconComponent = iconData.icon;
+      return <IconComponent className={`text-2xl text-${iconData.color}`} />;
+    }
+    return null;
+  };
 
   return (
     <div className="grid gap-4">
@@ -28,11 +40,9 @@ const ItemList = ({ items, loading, onEdit, onDelete, renderItem }) => {
                     className="w-16 h-16 rounded-lg object-cover"
                   />
                 )}
-                {renderedItem.icon && (
-                  <div className="w-10 h-10 flex items-center justify-center">
-                    {renderedItem.icon}
-                  </div>
-                )}
+                <div className="w-10 h-10 flex items-center justify-center">
+                  {item.category ? getIconComponent(item) : renderedItem.icon}
+                </div>
                 <div>
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                     {renderedItem.title}

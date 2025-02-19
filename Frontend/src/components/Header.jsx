@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FaSun, FaMoon } from 'react-icons/fa';
-import { useTheme } from '../contexts/ThemeContext';
 import { useLanguage } from '../contexts/LanguageContext';
 import LanguageToggle from './ui/LanguageToggle';
 import LanguageSelector from './ui/LanguageSelector';
@@ -11,7 +10,6 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { darkMode, toggleDarkMode } = useTheme();
   const { t } = useLanguage();
 
   const links = [

@@ -38,10 +38,10 @@ const ExperienceForm = ({ experienceToEdit, onCancel }) => {
         ...experienceToEdit,
         current: !experienceToEdit.endDate,
         period: experienceToEdit.endDate ? `${new Date(experienceToEdit.startDate).toLocaleString('default', { month: 'long' })} ${new Date(experienceToEdit.startDate).getFullYear()} - ${new Date(experienceToEdit.endDate).toLocaleString('default', { month: 'long' })} ${new Date(experienceToEdit.endDate).getFullYear()}` : `${new Date(experienceToEdit.startDate).toLocaleString('default', { month: 'long' })} ${new Date(experienceToEdit.startDate).getFullYear()} - Présent`,
-        achievements: experienceToEdit.achievements || [], // Initialise achievements si undefined
-        responsibilities: experienceToEdit.responsibilities || [], // Initialise responsibilities si undefined
-        technologies: experienceToEdit.technologies || [], // Initialise technologies si undefined
-        tools: experienceToEdit.tools || [], // Initialise tools si undefined
+        achievements: experienceToEdit.achievements || [],
+        responsibilities: experienceToEdit.responsibilities || [],
+        technologies: experienceToEdit.technologies || [],
+        tools: experienceToEdit.tools || [],
       });
     }
   }, [experienceToEdit]);
@@ -161,6 +161,7 @@ const ExperienceForm = ({ experienceToEdit, onCancel }) => {
           required
         />
       </FormField>
+
       {/* Lists */}
       <FormField label="Key Achievements">
         <TextArea
@@ -179,6 +180,7 @@ const ExperienceForm = ({ experienceToEdit, onCancel }) => {
           value={formData.technologies}
           onChange={(techs) => setFormData({ ...formData, technologies: techs })}
           suggestions={TECH_STACK}
+          placeholder="Add technologies..."
         />
       </FormField>
 

@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
-import { ThemeProvider } from './contexts/ThemeContext';
 import { LanguageProvider } from './contexts/LanguageContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -61,7 +60,7 @@ function AppContent() {
 
 function App() {
   return (
-    <ThemeProvider>
+    
       <LanguageProvider>
         <AuthProvider>
           <Router>
@@ -69,7 +68,7 @@ function App() {
           </Router>
         </AuthProvider>
       </LanguageProvider>
-    </ThemeProvider>
+    
   );
 }
 

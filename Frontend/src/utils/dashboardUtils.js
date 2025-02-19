@@ -1,44 +1,52 @@
-export const calculateSkillsByCategory = (skills = []) => {
+export const calculateSkillsByCategory = (skills) => {
+  if (!Array.isArray(skills)) return {};
   return skills.reduce((acc, skill) => {
     acc[skill.category] = (acc[skill.category] || 0) + 1;
     return acc;
   }, {});
 };
 
-export const calculateProjectsByTechnology = (projects = []) => {
-  const techCount = {};
-  projects.forEach(project => {
-    project.technologies.forEach(tech => {
-      techCount[tech] = (techCount[tech] || 0) + 1;
+export const calculateProjectsByTechnology = (projects) => {
+  if (!Array.isArray(projects)) return {};
+  const techCount = projects.reduce((acc, project) => {
+    project.technologies?.forEach(tech => {
+      acc[tech] = (acc[tech] || 0) + 1;
     });
-  });
+    return acc;
+  }, {});
+
   return techCount;
 };
 
-export const generateExperienceTimeline = (experiences = []) => {
-  return experiences
-    .sort((a, b) => new Date(b.startDate) - new Date(a.startDate))
-    .map(exp => ({
-      title: exp.title,
-      company: exp.company,
-      startDate: new Date(exp.startDate),
-      endDate: exp.endDate ? new Date(exp.endDate) : new Date(),
-      duration: calculateDuration(exp.startDate, exp.endDate)
-    }));
+export const generateExperienceTimeline = (experiences) => {
+  if (!Array.isArray(experiences)) return [];
+  
+  // Create a new array instead of modifying the original
+  const sortedExperiences = [...experiences].sort((a, b) => {
+    const dateA = new Date(a.startDate);
+    const dateB = new Date(b.startDate);
+    return dateB - dateA;
+  });
+
+  return sortedExperiences.map(exp => ({
+    date: new Date(exp.startDate).getFullYear(),
+    company: exp.company,
+    title: exp.title,
+    duration: exp.period
+  }));
 };
 
-const calculateDuration = (startDate, endDate) => {
-  const start = new Date(startDate);
-  const end = endDate ? new Date(endDate) : new Date();
-  const diffInMonths = (end.getFullYear() - start.getFullYear()) * 12 + 
-    (end.getMonth() - start.getMonth());
-  
-  const years = Math.floor(diffInMonths / 12);
-  const months = diffInMonths % 12;
-  
+export const getDashboardStats = (projects, skills, experiences) => {
   return {
-    years,
-    months,
-    totalMonths: diffInMonths
+    totalProjects: Array.isArray(projects) ? projects.length : 0,
+    totalSkills: Array.isArray(skills) ? skills.length : 0,
+    totalExperiences: Array.isArray(experiences) ? experiences.length : 0,
+    recentActivities: Array.isArray(experiences) ? 
+      experiences.slice(0, 3).map(exp => ({
+        type: 'experience',
+        title: exp.title,
+        company: exp.company,
+        date: new Date(exp.startDate).toLocaleDateString()
+      })) : []
   };
 };

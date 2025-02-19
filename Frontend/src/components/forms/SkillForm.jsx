@@ -39,7 +39,7 @@ const SkillForm = ({ skillToEdit, onSubmit, onCancel }) => {
     setSelectedIcon(iconObj);
     setFormData(prev => ({
       ...prev,
-      icon: iconObj.icon,
+      icon: iconObj.name, // On envoie le nom de l'icône au lieu de l'objet icon
       iconColor: iconObj.color
     }));
   };
@@ -83,20 +83,23 @@ const SkillForm = ({ skillToEdit, onSubmit, onCancel }) => {
 
       <FormField label="Select Icon">
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-          {ICONS[formData.category]?.map((iconObj) => (
-            <button
-              key={iconObj.icon}
-              type="button"
-              onClick={() => handleIconSelect(iconObj)}
-              className={`p-4 rounded-lg flex flex-col items-center gap-2 transition-all
-                ${selectedIcon?.icon === iconObj.icon 
-                  ? 'bg-violet-100 dark:bg-violet-900 ring-2 ring-violet-500' 
-                  : 'bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700'}`}
-            >
-              <i className={`fab ${iconObj.icon} text-2xl text-${iconObj.color}`} />
-              <span className="text-sm">{iconObj.name}</span>
-            </button>
-          ))}
+          {ICONS[formData.category]?.map((iconObj) => {
+            const IconComponent = iconObj.icon;
+            return (
+              <button
+                key={iconObj.name}
+                type="button"
+                onClick={() => handleIconSelect(iconObj)}
+                className={`p-4 rounded-lg flex flex-col items-center gap-2 transition-all
+                  ${selectedIcon?.name === iconObj.name 
+                    ? 'bg-violet-100 dark:bg-violet-900 ring-2 ring-violet-500' 
+                    : 'bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700'}`}
+              >
+                <IconComponent className={`text-2xl text-${iconObj.color}`} />
+                <span className="text-sm">{iconObj.name}</span>
+              </button>
+            );
+          })}
         </div>
       </FormField>
 

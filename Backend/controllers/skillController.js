@@ -22,9 +22,9 @@ exports.getSkillById = async (req, res) => {
 exports.createSkill = async (req, res) => {
     const skill = new Skill({
         name: req.body.name,
-        level: req.body.level,
         category: req.body.category,
-        icon: req.body.icon,
+        icon: req.body.icon, // Maintenant reçoit une chaîne de caractères (nom de l'icône)
+        iconColor: req.body.iconColor
     });
 
     try {
