@@ -83,7 +83,7 @@ const ExperienceForm = ({ experienceToEdit, onCancel }) => {
     <motion.form
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="space-y-6 p-6 max-h-[80vh] overflow-y-auto"
+      className="space-y-6 p-6 max-h-[80vh] overflow-y-auto bg-white rounded-xl shadow-lg"
       onSubmit={handleSubmit}
     >
       {/* Base Information */}
@@ -144,9 +144,9 @@ const ExperienceForm = ({ experienceToEdit, onCancel }) => {
                 current: e.target.checked,
                 endDate: e.target.checked ? '' : formData.endDate 
               })}
-              className="w-4 h-4 text-violet-600"
+              className="w-4 h-4 text-violet-600 border-gray-300 rounded focus:ring-violet-500"
             />
-            <span className="ml-2">I currently work here</span>
+            <span className="ml-2 text-gray-600">I currently work here</span>
           </div>
         </FormField>
       </div>

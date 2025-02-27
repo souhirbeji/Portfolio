@@ -17,7 +17,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
+    <footer className="bg-white border-t border-gray-200">
       <div className="container mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Logo and Description */}
@@ -27,14 +27,14 @@ const Footer = () => {
                 Portfolio
               </h3>
             </Link>
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className="text-gray-600">
               {t('footer.description')}
             </p>
           </div>
 
           {/* Quick Links */}
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
+            <h4 className="text-lg font-semibold text-gray-900">
               {t('footer.quickLinks')}
             </h4>
             <ul className="space-y-2">
@@ -42,7 +42,7 @@ const Footer = () => {
                 <li key={link.name}>
                   <Link
                     to={link.path}
-                    className="text-gray-600 dark:text-gray-400 hover:text-violet-500 dark:hover:text-violet-400 transition-colors"
+                    className="text-gray-600 hover:text-violet-500 transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -53,7 +53,7 @@ const Footer = () => {
 
           {/* Social Links */}
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
+            <h4 className="text-lg font-semibold text-gray-900">
               {t('footer.followMe')}
             </h4>
             <div className="flex space-x-4">
@@ -64,7 +64,7 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.1 }}
-                  className="text-gray-600 dark:text-gray-400 hover:text-violet-500 dark:hover:text-violet-400"
+                  className="text-gray-600 hover:text-violet-500"
                 >
                   {social.name}
                 </motion.a>
@@ -73,8 +73,8 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-800">
-          <p className="text-center text-gray-600 dark:text-gray-400">
+        <div className="mt-8 pt-8 border-t border-gray-200">
+          <p className="text-center text-gray-600">
             © {new Date().getFullYear()} Portfolio. {t('footer.rights')}
           </p>
         </div>

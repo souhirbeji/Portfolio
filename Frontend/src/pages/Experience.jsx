@@ -22,7 +22,7 @@ const Experience = () => {
   };
 
   return (
-    <div className="min-h-screen pt-24 pb-16 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen pt-24 pb-16 bg-gradient-to-br from-gray-50 to-gray-100">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0 }}
@@ -33,7 +33,7 @@ const Experience = () => {
             <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-violet-500 to-teal-500 bg-clip-text text-transparent">
               {t('experience.title')}
             </h1>
-            <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            <p className="text-gray-600 max-w-2xl mx-auto">
               {t('experience.subtitle')}
             </p>
           </motion.div>
@@ -61,12 +61,12 @@ const Experience = () => {
                     }`}
                   >
                     {/* Timeline dot with ping animation */}
-                    <div className="absolute left-0 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white dark:bg-gray-800 border-4 border-violet-500 rounded-full">
+                    <div className="absolute left-0 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white border-4 border-violet-500 rounded-full">
                       <div className="absolute w-full h-full rounded-full bg-violet-500 animate-ping opacity-20" />
                     </div>
 
                     {/* Content card */}
-                    <div className="md:w-1/2 bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+                    <div className="md:w-1/2 bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
                       {/* Header */}
                       <div className="flex items-center gap-2 text-violet-500 mb-2">
                         <FaBriefcase className="text-xl" />
@@ -74,7 +74,7 @@ const Experience = () => {
                       </div>
 
                       {/* Company info */}
-                      <div className="flex flex-wrap gap-4 text-sm text-gray-600 dark:text-gray-300 mb-4">
+                      <div className="flex flex-wrap gap-4 text-sm text-gray-600 mb-4">
                         <span className="flex items-center gap-1">
                           <FaMapMarkerAlt />
                           {t('experience.timeline.company')}: {exp.company}
@@ -86,7 +86,7 @@ const Experience = () => {
                       </div>
 
                       {/* Description */}
-                      <p className="text-gray-600 dark:text-gray-300 mb-4">
+                      <p className="text-gray-600 mb-4">
                         {exp.description}
                       </p>
 
@@ -97,8 +97,7 @@ const Experience = () => {
                           {exp.technologies.map((tech, i) => (
                             <span
                               key={i}
-                              className={`px-3 py-1 bg-${exp.color}-100 dark:bg-${exp.color}-900 
-                                text-${exp.color}-600 dark:text-${exp.color}-300 rounded-full text-sm`}
+                              className="px-3 py-1 bg-violet-100 text-violet-600 rounded-full text-sm"
                             >
                               {tech}
                             </span>
@@ -118,7 +117,7 @@ const Experience = () => {
                             className="flex items-start gap-2"
                           >
                             <FaMedal className="text-teal-500 mt-1" />
-                            <span className="text-gray-600 dark:text-gray-300">
+                            <span className="text-gray-600">
                               {achievement}
                             </span>
                           </motion.div>

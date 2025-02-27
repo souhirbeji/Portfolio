@@ -82,7 +82,7 @@ const Dashboard = () => {
     totalExperiences: experiences?.length || 0,
     skillsByCategory: calculateSkillsByCategory(skills),
     projectsByTechnology: calculateProjectsByTechnology(projects),
-    experienceTimeline: generateExperienceTimeline(experiences)
+    //experienceTimeline: generateExperienceTimeline(experiences)
   };
 
   const handleFormSubmit = async (formData, type) => {
@@ -213,22 +213,22 @@ const Dashboard = () => {
           <div className="space-y-8">
             {/* Stats Cards Row */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              <motion.div className="bg-orange-50 dark:bg-orange-900/20 rounded-2xl p-6 shadow-lg border border-orange-200">
+              <motion.div className="bg-orange-50 rounded-2xl p-6 shadow-lg border border-orange-200">
                 <h3 className="text-lg font-semibold text-orange-600">Total Projects</h3>
                 <p className="text-3xl font-bold text-orange-500">{stats.totalProjects}</p>
               </motion.div>
               
-              <motion.div className="bg-emerald-50 dark:bg-emerald-900/20 rounded-2xl p-6 shadow-lg border border-emerald-200">
+              <motion.div className="bg-emerald-50 rounded-2xl p-6 shadow-lg border border-emerald-200">
                 <h3 className="text-lg font-semibold text-emerald-600">Total Skills</h3>
                 <p className="text-3xl font-bold text-emerald-500">{stats.totalSkills}</p>
               </motion.div>
               
-              <motion.div className="bg-sky-50 dark:bg-sky-900/20 rounded-2xl p-6 shadow-lg border border-sky-200">
+              <motion.div className="bg-sky-50 rounded-2xl p-6 shadow-lg border border-sky-200">
                 <h3 className="text-lg font-semibold text-sky-600">Experiences</h3>
                 <p className="text-3xl font-bold text-sky-500">{stats.totalExperiences}</p>
               </motion.div>
               
-              <motion.div className="bg-violet-50 dark:bg-violet-900/20 rounded-2xl p-6 shadow-lg border border-violet-200">
+              <motion.div className="bg-violet-50 rounded-2xl p-6 shadow-lg border border-violet-200">
                 <h3 className="text-lg font-semibold text-violet-600">Profile Views</h3>
                 <p className="text-3xl font-bold text-violet-500">{viewCount}</p>
               </motion.div>
@@ -240,9 +240,9 @@ const Dashboard = () => {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="bg-gradient-to-br from-violet-50 to-sky-50 dark:from-violet-900/20 dark:to-sky-900/20 rounded-2xl p-6 shadow-lg border border-violet-200"
+                  className="bg-white rounded-2xl p-6 shadow-lg border border-gray-200"
                 >
-                  <h3 className="text-xl font-semibold mb-6 text-violet-600 dark:text-violet-300 border-b border-violet-200 pb-3 text-center">
+                  <h3 className="text-xl font-semibold mb-6 text-violet-600 border-b border-gray-200 pb-3 text-center">
                     Skills & Technologies Overview
                   </h3>
                   <div className="flex items-center min-h-[400px]">
@@ -259,12 +259,12 @@ const Dashboard = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 }}
-                  className="bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 rounded-2xl p-6 shadow-lg border border-emerald-200"
+                  className="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl p-6 shadow-lg border border-emerald-200"
                 >
-                  <h3 className="text-xl font-semibold mb-6 text-emerald-600 dark:text-emerald-300 border-b border-emerald-200 pb-3 text-center">
+                  <h3 className="text-xl font-semibold mb-6 text-emerald-600 border-b border-emerald-200 pb-3 text-center">
                     Project Distribution
                   </h3>
-                  <div className="flex justify-center items-center min-h-[300px]">
+                  <div className="flex justify-center items-center min-h-[300px] bg-white rounded-xl p-4">
                     <div className="w-full max-w-2xl">
                       <BarChart
                         data={stats.projectsByTechnology}
@@ -281,7 +281,7 @@ const Dashboard = () => {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 rounded-2xl p-6 shadow-lg border border-orange-200"
+                  className="bg-white rounded-2xl p-6 shadow-lg border border-gray-200"
                 >
                   <QuoteCard />
                 </motion.div>
@@ -290,9 +290,9 @@ const Dashboard = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
-                  className="bg-gradient-to-br from-sky-50 to-indigo-50 dark:from-sky-900/20 dark:to-indigo-900/20 rounded-2xl p-6 shadow-lg border border-sky-200"
+                  className="bg-white rounded-2xl p-6 shadow-lg border border-gray-200"
                 >
-                  <h3 className="text-xl font-semibold mb-4 text-sky-600 dark:text-sky-300 border-b border-sky-200 pb-3">
+                  <h3 className="text-xl font-semibold mb-4 text-sky-600 border-b border-gray-200 pb-3">
                     Recent Activities
                   </h3>
                   <div className="space-y-4">
@@ -300,7 +300,7 @@ const Dashboard = () => {
                       <div key={index} className="flex items-center space-x-3 text-sm">
                         <div className="w-2 h-2 rounded-full bg-sky-400"></div>
 
-                        <span className="text-sky-600 dark:text-sky-300">
+                        <span className="text-sky-600">
                           Created PowerBi Project
                         </span>
                       </div>
@@ -313,56 +313,65 @@ const Dashboard = () => {
         );
       case 'skills':
         return (
-          <ItemList
-            items={skills}
-            loading={skillsLoading}
-            onEdit={(item) => handleEdit(item, 'skill')}
-            onDelete={(id) => handleDelete(id, 'skill')}
-            renderItem={(skill) => ({
-              title: skill.name,
-              subtitle: skill.category,
-              icon: <i className={`fab ${skill.icon} text-${skill.iconColor}`} />,
-              tags: [skill.category]
-            })}
-          />
+          <div className="bg-white rounded-xl p-6 shadow-lg">
+            <ItemList
+              items={skills}
+              loading={skillsLoading}
+              onEdit={(item) => handleEdit(item, 'skill')}
+              onDelete={(id) => handleDelete(id, 'skill')}
+              renderItem={(skill) => ({
+                title: skill.name,
+                subtitle: skill.category,
+                icon: <i className={`fab ${skill.icon} text-${skill.iconColor}`} />,
+                tags: [skill.category]
+              })}
+              className="bg-white border border-gray-200 rounded-lg"
+            />
+          </div>
         );
       case 'projects':
         return (
-          <ItemList
-            items={projects}
-            loading={projectsLoading}
-            onEdit={(item) => handleEdit(item, 'project')}
-            onDelete={(id) => handleDelete(id, 'project')}
-            renderItem={(project) => ({
-              title: project.title,
-              subtitle: project.description,
-              image: project.imageUrl,
-              tags: project.technologies
-            })}
-          />
+          <div className="bg-white rounded-xl p-6 shadow-lg">
+            <ItemList
+              items={projects}
+              loading={projectsLoading}
+              onEdit={(item) => handleEdit(item, 'project')}
+              onDelete={(id) => handleDelete(id, 'project')}
+              renderItem={(project) => ({
+                title: project.title,
+                subtitle: project.description,
+                image: project.imageUrl,
+                tags: project.technologies
+              })}
+              className="bg-white border border-gray-200 rounded-lg"
+            />
+          </div>
         );
       case 'experiences':
         return (
-          <ItemList
-            items={experiences}
-            loading={experiencesLoading}
-            onEdit={(item) => handleEdit(item, 'experience')}
-            onDelete={(id) => handleDelete(id, 'experience')}
-            renderItem={(experience) => ({
-              title: experience.title,
-              subtitle: experience.company,
-              description: experience.description,
-              date: `${experience.period}`,
-              tags: experience.technologies
-            })}
-          />
+          <div className="bg-white rounded-xl p-6 shadow-lg">
+            <ItemList
+              items={experiences}
+              loading={experiencesLoading}
+              onEdit={(item) => handleEdit(item, 'experience')}
+              onDelete={(id) => handleDelete(id, 'experience')}
+              renderItem={(experience) => ({
+                title: experience.title,
+                subtitle: experience.company,
+                description: experience.description,
+                date: `${experience.period}`,
+                tags: experience.technologies
+              })}
+              className="bg-white border border-gray-200 rounded-lg"
+            />
+          </div>
         );
       case 'messages':
         return (
           <div className="space-y-4">
             {messages.map((message) => (
               <div key={message._id} 
-                className={`bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg
+                className={`bg-white rounded-lg p-6 shadow-lg
                   ${message.status === 'replied' ? 'border-l-4 border-green-500' : 'border-l-4 border-yellow-500'}`}
               >
                 <div className="flex justify-between items-start">
@@ -385,7 +394,7 @@ const Dashboard = () => {
                 {message.status === 'pending' ? (
                   <div className="mt-4">
                     <textarea
-                      className="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600
+                      className="w-full p-2 border rounded
                         focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                       placeholder="Votre réponse..."
                       value={replyTexts[message._id] || ''}
@@ -405,8 +414,8 @@ const Dashboard = () => {
                     </button>
                   </div>
                 ) : (
-                  <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-700 rounded">
-                    <p className="font-semibold text-green-600 dark:text-green-400">Réponse envoyée:</p>
+                  <div className="mt-4 p-4 bg-gray-50 rounded">
+                    <p className="font-semibold text-green-600">Réponse envoyée:</p>
                     <p className="mt-2">{message.reply}</p>
                   </div>
                 )}
@@ -420,7 +429,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-violet-100/20 to-teal-100/20 dark:from-violet-900/20 dark:to-teal-900/20">
+    <div className="min-h-screen bg-gradient-to-br from-violet-100/20 to-teal-100/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Dashboard Header with Logout Button */}
         <div className="mb-12 relative">
@@ -446,14 +455,14 @@ const Dashboard = () => {
                 {t('dashboard.title')}
               </span>
             </motion.h1>
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className="text-gray-600">
               {t('dashboard.subtitle')}
             </p>
           </div>
         </div>
 
         {/* Navigation Tabs - Updated design with gradient */}
-        <div className="mb-8 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl p-2 shadow-lg">
+        <div className="mb-8 bg-white/80 backdrop-blur-sm rounded-xl p-2 shadow-lg">
           <nav className="flex space-x-2">
             {['overview', 'skills', 'projects', 'experiences', 'messages'].map((section) => (
               <button
@@ -462,7 +471,7 @@ const Dashboard = () => {
                 className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 flex items-center space-x-2
                   ${activeSection === section 
                     ? 'bg-gradient-to-r from-violet-500 to-teal-500 text-white shadow-lg' 
-                    : 'hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300'}`}
+                    : 'hover:bg-gray-100 text-gray-600'}`}
               >
                 {getTabIcon(section)}
                 <span>{t(`dashboard.sections.${section}`)}</span>
@@ -473,7 +482,7 @@ const Dashboard = () => {
 
         {/* Background decoration */}
         <div className="absolute inset-0 -z-10">
-          <div className="absolute inset-0 bg-gradient-to-br from-violet-100/20 to-teal-100/20 dark:from-violet-900/20 dark:to-teal-900/20" />
+          <div className="absolute inset-0 bg-gradient-to-br from-violet-100/20 to-teal-100/20" />
           <motion.div
             animate={{
               backgroundPosition: ['0% 0%', '100% 100%'],

@@ -3,7 +3,7 @@ import React from 'react';
 
 export const FormField = ({ label, children, error }) => (
   <div className="space-y-1">
-    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+    <label className="block text-sm font-medium text-gray-700">
       {label}
     </label>
     {children}
@@ -16,8 +16,8 @@ export const FormField = ({ label, children, error }) => (
 export const Input = React.forwardRef(({ className = '', ...props }, ref) => (
   <input
     ref={ref}
-    className={`w-full p-2.5 rounded-lg border border-gray-300 dark:border-gray-600 
-    bg-white dark:bg-gray-700 text-gray-900 dark:text-white
+    className={`w-full p-2.5 rounded-lg border border-gray-300 
+    bg-white text-gray-900
     focus:ring-2 focus:ring-violet-500 focus:border-transparent
     transition duration-150 ease-in-out ${className}`}
     {...props}
@@ -27,8 +27,8 @@ export const Input = React.forwardRef(({ className = '', ...props }, ref) => (
 export const Select = React.forwardRef(({ options, className = '', ...props }, ref) => (
   <select
     ref={ref}
-    className={`w-full p-2.5 rounded-lg border border-gray-300 dark:border-gray-600 
-    bg-white dark:bg-gray-700 text-gray-900 dark:text-white
+    className={`w-full p-2.5 rounded-lg border border-gray-300 
+    bg-white text-gray-900
     focus:ring-2 focus:ring-violet-500 focus:border-transparent
     transition duration-150 ease-in-out ${className}`}
     {...props}
@@ -44,8 +44,8 @@ export const Select = React.forwardRef(({ options, className = '', ...props }, r
 export const TextArea = React.forwardRef(({ className = '', ...props }, ref) => (
   <textarea
     ref={ref}
-    className={`w-full p-2.5 rounded-lg border border-gray-300 dark:border-gray-600 
-    bg-white dark:bg-gray-700 text-gray-900 dark:text-white
+    className={`w-full p-2.5 rounded-lg border border-gray-300 
+    bg-white text-gray-900
     focus:ring-2 focus:ring-violet-500 focus:border-transparent
     transition duration-150 ease-in-out resize-y ${className}`}
     {...props}
@@ -55,7 +55,7 @@ export const TextArea = React.forwardRef(({ className = '', ...props }, ref) => 
 export const Button = ({ variant = 'primary', className = '', ...props }) => {
   const variants = {
     primary: 'bg-violet-500 hover:bg-violet-600 text-white',
-    secondary: 'bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-900 dark:text-white',
+    secondary: 'bg-gray-200 hover:bg-gray-300 text-gray-900',
     danger: 'bg-red-500 hover:bg-red-600 text-white'
   };
 
@@ -96,7 +96,7 @@ export const TagInput = ({ value, onChange, suggestions, placeholder }) => {
           <span
             key={index}
             className="inline-flex items-center px-3 py-1 rounded-full text-sm
-            bg-violet-100 dark:bg-violet-900 text-violet-800 dark:text-violet-200"
+            bg-violet-100 text-violet-800"
           >
             {tag}
             <button
@@ -115,11 +115,11 @@ export const TagInput = ({ value, onChange, suggestions, placeholder }) => {
           value={inputValue}
           onChange={handleInputChange}
           placeholder={placeholder}
-          className="w-full p-2.5 rounded-lg border border-gray-300 dark:border-gray-600 
-          bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+          className="w-full p-2.5 rounded-lg border border-gray-300 
+          bg-white text-gray-900"
         />
         {showSuggestions && (
-          <div className="absolute z-10 w-full mt-1 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
+          <div className="absolute z-10 w-full mt-1 bg-white rounded-lg shadow-lg">
             {suggestions
               .filter(s => s.toLowerCase().includes(inputValue.toLowerCase()))
               .slice(0, 5)
@@ -128,7 +128,7 @@ export const TagInput = ({ value, onChange, suggestions, placeholder }) => {
                   key={index}
                   type="button"
                   onClick={() => addTag(suggestion)}
-                  className="w-full px-4 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-700"
+                  className="w-full px-4 py-2 text-left hover:bg-gray-100"
                 >
                   {suggestion}
                 </button>
@@ -139,7 +139,6 @@ export const TagInput = ({ value, onChange, suggestions, placeholder }) => {
     </div>
   );
 };
-
 
 export const DatePicker = React.forwardRef(({ value, onChange, disabled, required, className = '', ...props }, ref) => {
   const formatDate = (date) => {
@@ -172,8 +171,8 @@ export const DatePicker = React.forwardRef(({ value, onChange, disabled, require
       onChange={handleChange}
       disabled={disabled}
       required={required}
-      className={`w-full p-2.5 rounded-lg border border-gray-300 dark:border-gray-600 
-        bg-white dark:bg-gray-700 text-gray-900 dark:text-white
+      className={`w-full p-2.5 rounded-lg border border-gray-300 
+        bg-white text-gray-900
         focus:ring-2 focus:ring-violet-500 focus:border-transparent
         disabled:opacity-50 disabled:cursor-not-allowed
         transition duration-150 ease-in-out ${className}`}

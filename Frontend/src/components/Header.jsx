@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { FaSun, FaMoon } from 'react-icons/fa';
 import { useLanguage } from '../contexts/LanguageContext';
-import LanguageToggle from './ui/LanguageToggle';
 import LanguageSelector from './ui/LanguageSelector';
 
 const Header = () => {
@@ -31,7 +29,7 @@ const Header = () => {
   return (
     <header
       className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg shadow-lg' : 'bg-transparent'
+        isScrolled ? 'bg-white/80 backdrop-blur-lg shadow-lg' : 'bg-transparent'
       }`}
     >
       <nav className="container mx-auto px-6 py-4">
@@ -46,20 +44,23 @@ const Header = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`text-gray-700 dark:text-gray-200 hover:text-violet-500 dark:hover:text-violet-400 transition-colors ${
-                  location.pathname === link.path ? 'text-violet-500 dark:text-violet-400' : ''
+                className={`text-gray-700 hover:text-violet-500 transition-colors ${
+                  location.pathname === link.path ? 'text-violet-500' : ''
                 }`}
               >
                 {link.label}
               </Link>
             ))}
-            <LanguageSelector />
+            <LanguageSelector 
+              className="px-3 py-1 bg-violet-100 text-violet-600 rounded-full 
+                hover:bg-violet-200 transition-colors text-sm font-medium"
+            />
           </div>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden text-gray-700 dark:text-gray-200"
+            className="md:hidden text-gray-700"
           >
             {isMenuOpen ? '✕' : '☰'}
           </button>
@@ -70,18 +71,22 @@ const Header = () => {
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="md:hidden mt-4 space-y-4"
+            className="md:hidden mt-4 space-y-4 bg-white rounded-lg p-4 shadow-lg"
           >
             {links.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className="block text-gray-700 dark:text-gray-200 hover:text-violet-500 dark:hover:text-violet-400"
+                className="block text-gray-700 hover:text-violet-500"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {link.label}
               </Link>
             ))}
+            <LanguageSelector 
+              className="w-full px-3 py-1 bg-violet-100 text-violet-600 rounded-full 
+                hover:bg-violet-200 transition-colors text-sm font-medium text-center"
+            />
           </motion.div>
         )}
       </nav>

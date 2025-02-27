@@ -264,5 +264,23 @@
         }
       }
     }
+  },
+  "auth": {
+    "welcomeBack": "Welcome Back!",
+    "pleaseSignIn": "Please sign in to access your dashboard",
+    "emailAddress": "Email address",
+    "password": "Password",
+    "signIn": "Sign in",
+    "loading": "Signing in...",
+    "emailPlaceholder": "your@email.com",
+    "passwordPlaceholder": "Enter your password",
+    "error": "Invalid credentials. Please try again.",
+    "success": "Successfully logged in!",
+    "rememberMe": "Remember me",
+    "forgotPassword": "Forgot password?",
+    "noAccount": "Don't have an account?",
+    "createAccount": "Create account",
+    "or": "or",
+    "continueWith": "Continue with"
   }
 }

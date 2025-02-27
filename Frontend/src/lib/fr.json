@@ -1,4 +1,5 @@
 {
+
   "nav": {
     "home": "Accueil",
     "projects": "Projets",
@@ -85,8 +86,8 @@
       "fullstack": "Full Stack",
       "mobile": "Mobile"
     },
-    "loading": "Chargement des projets...",
-    "error": "Erreur lors du chargement des projets:"
+    "loading": "Chargement des projets en cours...",
+    "error": "Une erreur est survenue lors du chargement des projets"
   },
   "footer": {
     "description": "Développeuse Full Stack et data analyste passionnée par les technologies innovantes",
@@ -139,8 +140,8 @@
       "message": "Message",
       "submit": "Envoyer",
       "sending": "Envoi en cours...",
-      "success": "Votre message a été envoyé avec succès. Je vous répondrai dans les plus brefs délais.",
-      "error": "Une erreur s'est produite lors de l'envoi de votre message. Veuillez réessayer plus tard."
+      "success": "Message envoyé avec succès ! Je vous répondrai dans les plus brefs délais.",
+      "error": "Une erreur est survenue lors de l'envoi. Veuillez réessayer."
     },
     "info": {
       "title": "Coordonnées",
@@ -185,8 +186,8 @@
     }
   },
   "experience": {
-    "title": "Parcours Professionnel",
-    "subtitle": "Mon parcours professionnel reflète ma passion pour le développement web et mon engagement constant pour l'innovation",
+    "title": "Parcours professionnel",
+    "subtitle": "Mon parcours reflète ma passion pour le développement et l'innovation",
     "loading": "Chargement des expériences...",
     "error": "Erreur lors du chargement :",
     "timeline": {
@@ -264,5 +265,21 @@
         }
       }
     }
+  },
+  "auth": {
+    "welcomeBack": "Bon retour parmi nous !",
+    "pleaseSignIn": "Veuillez vous connecter pour continuer",
+    "emailAddress": "Adresse e-mail",
+    "password": "Mot de passe",
+    "signIn": "Se connecter",
+    "loading": "Connexion en cours...",
+    "emailPlaceholder": "votre@email.com",
+    "passwordPlaceholder": "Votre mot de passe",
+    "error": "Identifiants incorrects. Veuillez réessayer.",
+    "forgotten": "Mot de passe oublié ?",
+    "noAccount": "Pas encore de compte ?",
+    "createAccount": "Créer un compte",
+    "success": "Connexion réussie !",
+    "logout": "Déconnexion"
   }
 }

@@ -48,7 +48,7 @@ const SkillForm = ({ skillToEdit, onSubmit, onCancel }) => {
     <motion.form
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg space-y-6"
+      className="p-6 bg-white rounded-2xl shadow-lg space-y-6"
       onSubmit={async (e) => {
         e.preventDefault();
         try {
@@ -82,7 +82,7 @@ const SkillForm = ({ skillToEdit, onSubmit, onCancel }) => {
       </FormField>
 
       <FormField label="Select Icon">
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 p-4 bg-gray-50 rounded-lg">
           {ICONS[formData.category]?.map((iconObj) => {
             const IconComponent = iconObj.icon;
             return (
@@ -92,11 +92,11 @@ const SkillForm = ({ skillToEdit, onSubmit, onCancel }) => {
                 onClick={() => handleIconSelect(iconObj)}
                 className={`p-4 rounded-lg flex flex-col items-center gap-2 transition-all
                   ${selectedIcon?.name === iconObj.name 
-                    ? 'bg-violet-100 dark:bg-violet-900 ring-2 ring-violet-500' 
-                    : 'bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700'}`}
+                    ? 'bg-violet-100 ring-2 ring-violet-500' 
+                    : 'bg-white hover:bg-gray-50'}`}
               >
                 <IconComponent className={`text-2xl text-${iconObj.color}`} />
-                <span className="text-sm">{iconObj.name}</span>
+                <span className="text-sm text-gray-600">{iconObj.name}</span>
               </button>
             );
           })}

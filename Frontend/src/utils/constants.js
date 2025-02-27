@@ -29,50 +29,7 @@ export const TECH_STACK = [
   'MongoDB', 'PostgreSQL', 'TypeScript', 'JavaScript', 'Python',
   'Django', 'PHP', 'Laravel', 'Docker', 'AWS', 'Firebase',
   'Redux', 'GraphQL', 'REST API', 'Tailwind CSS', 'SASS',
-  'Git', 'CI/CD', 'Jest', 'React Native', 'Flutter',
-  // Data & BI Tools
-  'Power BI',
-  'Talend',
-  'PySpark',
-  
-  // Data Science & ML
-  'Python',
-  'Pandas',
-  'NumPy',
-  'Matplotlib',
-  'Scikit-Learn',
-  'TensorFlow',
-  
-  // Databases
-  'NoSQL',
-  'SQL',
-  'MongoDB',
-  'PostgreSQL',
-  
-  // Development Tools
-  'Microsoft Office',
-  'LaTeX',
-  'Git',
-  'Docker'
-];
-
-export const TECHNOLOGY_CATEGORIES = [
-  {
-    category: 'Data & BI',
-    technologies: ['Power BI', 'Talend', 'PySpark', 'Tableau']
-  },
-  {
-    category: 'Data Science & ML',
-    technologies: ['Python', 'Pandas', 'NumPy', 'Matplotlib', 'Scikit-Learn', 'TensorFlow', 'Keras']
-  },
-  {
-    category: 'Databases',
-    technologies: ['NoSQL', 'SQL', 'MongoDB', 'PostgreSQL', 'MySQL']
-  },
-  {
-    category: 'Development Tools',
-    technologies: ['Microsoft Office', 'LaTeX', 'Git', 'Docker', 'VS Code', 'Jupyter']
-  }
+  'Git', 'CI/CD', 'Jest', 'React Native', 'Flutter'
 ];
 
 export const ICONS = {

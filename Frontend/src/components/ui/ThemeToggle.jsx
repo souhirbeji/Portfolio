@@ -1,7 +1,7 @@
 import { FaSun, FaMoon } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
-const ThemeToggle = ({ isDark, toggleTheme }) => {
+const ThemeToggle = ({ isDark = false , toggleTheme }) => {
   return (
     <motion.button
       onClick={toggleTheme}

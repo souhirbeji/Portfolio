@@ -17,7 +17,7 @@ const BarChart = ({ data, title, className = '' }) => {
         labels,
         datasets: [{
           data: values,
-          backgroundColor: '#8B5CF6',
+          backgroundColor: '#8B5CF6', // violet-500
           borderRadius: 6,
         }]
       },
@@ -26,11 +26,12 @@ const BarChart = ({ data, title, className = '' }) => {
         maintainAspectRatio: false,
         plugins: {
           legend: {
-            display: false,
+            display: false
           },
           title: {
             display: true,
             text: title,
+            color: '#1F2937', // text-gray-800
             font: {
               size: 16,
               weight: 'bold'
@@ -41,7 +42,19 @@ const BarChart = ({ data, title, className = '' }) => {
           y: {
             beginAtZero: true,
             ticks: {
-              stepSize: 1
+              stepSize: 1,
+              color: '#4B5563' // text-gray-600
+            },
+            grid: {
+              color: '#E5E7EB' // gray-200
+            }
+          },
+          x: {
+            ticks: {
+              color: '#4B5563' // text-gray-600
+            },
+            grid: {
+              display: false
             }
           }
         }
@@ -55,7 +68,7 @@ const BarChart = ({ data, title, className = '' }) => {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className={`bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg ${className}`}
+      className={`bg-white rounded-2xl p-6 shadow-lg ${className}`}
     >
       <canvas ref={chartRef} />
     </motion.div>

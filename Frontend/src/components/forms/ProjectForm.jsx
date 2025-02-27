@@ -29,7 +29,7 @@ const ProjectForm = ({ projectToEdit, onSubmit, onCancel }) => {
     <motion.form
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="space-y-6 p-6"
+      className="space-y-6 p-6 bg-white rounded-xl shadow-lg"
       onSubmit={(e) => {
         e.preventDefault();
         onSubmit(formData);
@@ -109,6 +109,18 @@ const ProjectForm = ({ projectToEdit, onSubmit, onCancel }) => {
             className="w-5 h-5 text-violet-600"
           />
         </FormField>
+      </div>
+
+      <div className="flex items-center mb-4">
+        <label className="flex items-center cursor-pointer">
+          <input
+            type="checkbox"
+            checked={formData.favorite}
+            onChange={(e) => setFormData({ ...formData, favorite: e.target.checked })}
+            className="w-5 h-5 text-violet-600 bg-white border-gray-300 rounded focus:ring-violet-500"
+          />
+          <span className="ml-2 text-gray-600">Featured Project</span>
+        </label>
       </div>
 
       <div className="flex justify-end space-x-4">

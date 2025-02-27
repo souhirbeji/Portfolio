@@ -94,7 +94,7 @@ const About = () => {
           </h1>
 
           <div className="mb-12">
-            <p className="text-lg text-gray-600 dark:text-gray-300 text-center max-w-3xl mx-auto">
+            <p className="text-lg text-gray-600 text-center max-w-3xl mx-auto">
               Passionate about Web Development, Data and AI, I create innovative digital solutions
             </p>
           </div>
@@ -118,7 +118,7 @@ const About = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
-                    className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow"
+                    className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow"
                   >
                     <h3 className="text-xl font-semibold mb-4 text-violet-500">{capitalizeFirstLetter(category)}</h3>
                     <ul className="space-y-4">
@@ -153,7 +153,7 @@ const About = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.2 }}
-                  className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg relative overflow-hidden group hover:shadow-xl transition-shadow"
+                  className="bg-white rounded-xl p-6 shadow-lg relative overflow-hidden group hover:shadow-xl transition-shadow"
                 >
                   {/* Decorative background */}
                   <div className="absolute inset-0 opacity-5 group-hover:opacity-10 transition-opacity">
@@ -166,7 +166,7 @@ const About = () => {
                       <h3 className="text-xl font-bold">{passion.title}</h3>
                     </div>
 
-                    <p className="text-gray-600 dark:text-gray-300 mb-6">
+                    <p className="text-gray-600 mb-6">
                       {passion.description}
                     </p>
 
@@ -177,7 +177,7 @@ const About = () => {
                           {passion.favorites.map((item, i) => (
                             <span
                               key={i}
-                              className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 rounded-full text-sm"
+                              className="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm"
                             >
                               {item}
                             </span>
@@ -191,7 +191,7 @@ const About = () => {
                         <h4 className="font-semibold mb-2">{t(`passions.categories.${key}.interests.title`)}</h4>
                         {renderPassionItems(
                           t(`passions.categories.${key}.interests.items`),
-                          "bg-violet-100 dark:bg-violet-900 text-violet-600 dark:text-violet-300"
+                          "bg-violet-100 text-violet-600"
                         )}
                       </div>
                     )}
@@ -201,7 +201,7 @@ const About = () => {
                         <h4 className="font-semibold mb-2">{t(`passions.categories.${key}.activities.title`)}</h4>
                         {renderPassionItems(
                           t(`passions.categories.${key}.activities.items`),
-                          "bg-teal-100 dark:bg-teal-900 text-teal-600 dark:text-teal-300"
+                          "bg-teal-100 text-teal-600"
                         )}
                       </div>
                     )}
@@ -211,13 +211,13 @@ const About = () => {
                         <h4 className="font-semibold mb-2">{t(`passions.categories.${key}.goals.title`)}</h4>
                         {renderPassionItems(
                           t(`passions.categories.${key}.goals.items`),
-                          "bg-amber-100 dark:bg-amber-900 text-amber-600 dark:text-amber-300"
+                          "bg-amber-100 text-amber-600"
                         )}
                       </div>
                     )}
 
                     {passion.quote && (
-                      <div className="mt-4 italic text-gray-600 dark:text-gray-400">
+                      <div className="mt-4 italic text-gray-600">
                         "{passion.quote}"
                       </div>
                     )}
@@ -233,9 +233,9 @@ const About = () => {
             animate={{ opacity: 1, y: 0 }}
             className="mt-12"
           >
-            <div className="bg-gradient-to-r from-violet-100 to-teal-100 dark:from-violet-900 dark:to-teal-900 rounded-2xl p-8 text-center">
+            <div className="bg-gradient-to-r from-violet-100 to-teal-100 rounded-2xl p-8 text-center">
               <h2 className="text-2xl font-bold mb-4">{t('about.collaboration.title')}</h2>
-              <p className="text-gray-600 dark:text-gray-300 mb-6">
+              <p className="text-gray-600 mb-6">
                 {t('about.collaboration.subtitle')}
               </p>
               <Link

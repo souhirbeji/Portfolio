@@ -56,44 +56,36 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen pt-24 pb-16 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen pt-24 pb-16 bg-gradient-to-br from-gray-50 to-gray-100">
       <div className="container mx-auto px-6">
         <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-center mb-12"
-          >
+          <motion.div className="text-center mb-12">
             <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-violet-500 to-teal-500 bg-clip-text text-transparent">
               {t('contact.title')}
             </h1>
-            <p className="text-gray-600 dark:text-gray-300">
+            <p className="text-gray-600">
               {t('contact.subtitle')}
             </p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-12">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="space-y-8"
-            >
-              <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg">
+            <motion.div className="space-y-8">
+              <div className="bg-white rounded-2xl p-6 shadow-lg">
                 <h3 className="text-xl font-semibold mb-4">{t('contact.info.title')}</h3>
                 <div className="space-y-4">
                   {contactInfo.map((item, index) => (
                     <div key={index} className="flex items-center space-x-3">
                       <span className="text-violet-500">{item.icon}</span>
                       <div>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">{item.label}</p>
-                        <p className="text-gray-800 dark:text-gray-200">{item.value}</p>
+                        <p className="text-sm text-gray-500">{item.label}</p>
+                        <p className="text-gray-800">{item.value}</p>
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg">
+              <div className="bg-white rounded-2xl p-6 shadow-lg">
                 <h3 className="text-xl font-semibold mb-4">{t('contact.social.title')}</h3>
                 <div className="flex space-x-4">
                   {socialLinks.map((social, index) => (
@@ -103,7 +95,7 @@ const Contact = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       whileHover={{ scale: 1.1 }}
-                      className={`text-2xl text-gray-600 dark:text-gray-400 ${social.color}`}
+                      className={`text-2xl text-gray-600 ${social.color}`}
                     >
                       {social.icon}
                     </motion.a>
@@ -116,10 +108,10 @@ const Contact = () => {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               onSubmit={handleSubmit}
-              className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg space-y-6"
+              className="bg-white rounded-2xl p-6 shadow-lg space-y-6"
             >
               <div>
-                <label className="block mb-2 text-gray-700 dark:text-gray-300">
+                <label className="block mb-2 text-gray-700">
                   {t('contact.form.name')}
                 </label>
                 <input
@@ -127,7 +119,7 @@ const Contact = () => {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 rounded-lg border dark:bg-gray-700 dark:border-gray-600
+                  className="w-full px-4 py-2 rounded-lg border
                     focus:ring-2 focus:ring-violet-500 focus:border-transparent
                     transition duration-150 ease-in-out"
                   required
@@ -136,7 +128,7 @@ const Contact = () => {
               </div>
               
               <div>
-                <label className="block mb-2 text-gray-700 dark:text-gray-300">
+                <label className="block mb-2 text-gray-700">
                   {t('contact.form.email')}
                 </label>
                 <input
@@ -144,7 +136,7 @@ const Contact = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 rounded-lg border dark:bg-gray-700 dark:border-gray-600
+                  className="w-full px-4 py-2 rounded-lg border
                     focus:ring-2 focus:ring-violet-500 focus:border-transparent
                     transition duration-150 ease-in-out"
                   required
@@ -153,7 +145,7 @@ const Contact = () => {
               </div>
               
               <div>
-                <label className="block mb-2 text-gray-700 dark:text-gray-300">
+                <label className="block mb-2 text-gray-700">
                   {t('contact.form.message')}
                 </label>
                 <textarea
@@ -161,7 +153,7 @@ const Contact = () => {
                   value={formData.message}
                   onChange={handleChange}
                   rows="4"
-                  className="w-full px-4 py-2 rounded-lg border dark:bg-gray-700 dark:border-gray-600
+                  className="w-full px-4 py-2 rounded-lg border
                     focus:ring-2 focus:ring-violet-500 focus:border-transparent
                     transition duration-150 ease-in-out resize-none"
                   required
@@ -187,7 +179,6 @@ const Contact = () => {
         </div>
       </div>
 
-      {/* Toast pour les notifications */}
       {showToast && (
         <Toast
           message={toastMessage}
