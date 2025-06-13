@@ -22,6 +22,7 @@ const About = () => {
 
   // Fonction pour mettre la première lettre en majuscule
   const capitalizeFirstLetter = (string) => {
+    if (!string) return '';
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
 
@@ -43,42 +44,52 @@ const About = () => {
     return null;
   };
 
+  // Mise à jour des données des passions pour s'assurer qu'elles sont bien au format tableau
   const passions = {
     anime: {
       title: t('passions.categories.anime.title'),
       icon: <SiMyanimelist className="text-4xl text-blue-600" />,
       description: t('passions.categories.anime.description'),
-      favorites: ["Attack on Titan", "Death Note", "Full Metal Alchemist", "Monster"],
+      favorites: ["Demon Slayer", "Sailor Moon", "Nana", "Solo Leveling"],
       quote: t('passions.categories.anime.quote')
     },
-    philosophy: {
-      title: t('passions.categories.philosophy.title'),
+    Spirituality: {
+      title: t('passions.categories.Spirituality.title'),
       icon: <FaBookReader className="text-4xl text-purple-600" />,
-      description: t('passions.categories.philosophy.description'),
-      interests: ["Existentialisme", "Stoïcisme", "Philosophie de l'esprit"],
-      philosophers: ["Albert Camus", "Friedrich Nietzsche", "Marcus Aurelius"]
+      description: t('passions.categories.Spirituality.description'),
+      interests: t('passions.categories.Spirituality.interests.items', { returnObjects: true }) || [],
+      activities: t('passions.categories.Spirituality.activities.items', { returnObjects: true }) || []
     },
     sport: {
       title: t('passions.categories.sport.title'),
       icon: <FaDumbbell className="text-4xl text-red-600" />,
       description: t('passions.categories.sport.description'),
-      activities: ["Musculation", "Course à pied", "Yoga"],
-      goals: ["Amélioration continue", "Discipline", "Bien-être"]
+      activities: t('passions.categories.sport.activities.items', { returnObjects: true }) || [],
+      goals: t('passions.categories.sport.goals.items', { returnObjects: true }) || []
     }
   };
 
-  const renderPassionItems = (items, className) => (
-    <div className="flex flex-wrap gap-2">
-      {items.map((item, i) => (
-        <span
-          key={i}
-          className={`px-3 py-1 ${className} rounded-full text-sm`}
-        >
-          {item}
-        </span>
-      ))}
-    </div>
-  );
+  // Fonction renderPassionItems corrigée pour vérifier si les items sont un tableau
+  const renderPassionItems = (items, className) => {
+    // Vérifier si items est défini et si c'est un tableau
+    if (!items) return null;
+    
+    // Convertir en tableau si ce n'est pas déjà le cas
+    const itemsArray = Array.isArray(items) ? items : [items];
+    
+    return (
+      <div className="flex flex-wrap gap-2">
+        {itemsArray.map((item, i) => (
+          <span
+            key={i}
+            className={`px-3 py-1 ${className} rounded-full text-sm`}
+          >
+            {item}
+          </span>
+        ))}
+      </div>
+    );
+  };
 
   return (
     <div className="min-h-screen pt-24 pb-16">
@@ -95,7 +106,7 @@ const About = () => {
 
           <div className="mb-12">
             <p className="text-lg text-gray-600 text-center max-w-3xl mx-auto">
-              Passionate about Web Development, Data and AI, I create innovative digital solutions
+                Empowering businesses with innovative Web Development, Data analysis, and AI-driven technologies
             </p>
           </div>
 
@@ -173,46 +184,28 @@ const About = () => {
                     {passion.favorites && (
                       <div className="mb-4">
                         <h4 className="font-semibold mb-2">Favoris :</h4>
-                        <div className="flex flex-wrap gap-2">
-                          {passion.favorites.map((item, i) => (
-                            <span
-                              key={i}
-                              className="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm"
-                            >
-                              {item}
-                            </span>
-                          ))}
-                        </div>
+                        {renderPassionItems(passion.favorites, "bg-blue-100 text-blue-600")}
                       </div>
                     )}
 
                     {passion.interests && (
                       <div className="mb-4">
-                        <h4 className="font-semibold mb-2">{t(`passions.categories.${key}.interests.title`)}</h4>
-                        {renderPassionItems(
-                          t(`passions.categories.${key}.interests.items`),
-                          "bg-violet-100 text-violet-600"
-                        )}
+                        <h4 className="font-semibold mb-2">{t(`passions.categories.${key}.interests.title`, "Centres d'intérêt")}</h4>
+                        {renderPassionItems(passion.interests, "bg-violet-100 text-violet-600")}
                       </div>
                     )}
 
                     {passion.activities && (
                       <div className="mb-4">
-                        <h4 className="font-semibold mb-2">{t(`passions.categories.${key}.activities.title`)}</h4>
-                        {renderPassionItems(
-                          t(`passions.categories.${key}.activities.items`),
-                          "bg-teal-100 text-teal-600"
-                        )}
+                        <h4 className="font-semibold mb-2">{t(`passions.categories.${key}.activities.title`, "Activités")}</h4>
+                        {renderPassionItems(passion.activities, "bg-teal-100 text-teal-600")}
                       </div>
                     )}
 
                     {passion.goals && (
                       <div className="mb-4">
-                        <h4 className="font-semibold mb-2">{t(`passions.categories.${key}.goals.title`)}</h4>
-                        {renderPassionItems(
-                          t(`passions.categories.${key}.goals.items`),
-                          "bg-amber-100 text-amber-600"
-                        )}
+                        <h4 className="font-semibold mb-2">{t(`passions.categories.${key}.goals.title`, "Objectifs")}</h4>
+                        {renderPassionItems(passion.goals, "bg-amber-100 text-amber-600")}
                       </div>
                     )}
 

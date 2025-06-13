@@ -14,7 +14,7 @@ import {
 } from 'react-icons/bs';
 import {
   HiUserGroup, HiClock, HiLightBulb, HiClipboardList,
-  HiPuzzle, HiChat, HiAcademicCap
+  HiPuzzle, HiChat, HiAcademicCap, HiBadgeCheck, HiChip
 } from 'react-icons/hi';
 import {
   SiPandas, SiNumpy, SiScikitlearn, SiTensorflow,
@@ -22,14 +22,17 @@ import {
   SiJupyter
 } from 'react-icons/si';
 import { DiPython } from 'react-icons/di';
-import { VscGraph } from 'react-icons/vsc';
+import { VscGraph, VscProject, VscSymbolClass } from 'react-icons/vsc';
+import { AiFillMessage, AiFillExperiment, AiFillRobot, AiOutlineRadarChart } from "react-icons/ai";
 
 export const TECH_STACK = [
   'React', 'Vue.js', 'Angular', 'Next.js', 'Node.js', 'Express',
-  'MongoDB', 'PostgreSQL', 'TypeScript', 'JavaScript', 'Python',
+  'MongoDB', 'PostgreSQL', 'TypeScript', 'JavaScript', 'Python','SQL',
   'Django', 'PHP', 'Laravel', 'Docker', 'AWS', 'Firebase',
   'Redux', 'GraphQL', 'REST API', 'Tailwind CSS', 'SASS',
-  'Git', 'CI/CD', 'Jest', 'React Native', 'Flutter'
+  'Git', 'CI/CD', 'Jest', 'React Native', 'Flutter',
+  'TensorFlow', 'PyTorch', 'Scikit-Learn', 'NLP', 'Computer Vision',
+  'Sentiment Analysis', 'Text Classification', 'Transformers', 'PowerBI'
 ];
 
 export const ICONS = {
@@ -53,6 +56,7 @@ export const ICONS = {
     { name: 'Database', icon: FaDatabase, color: 'gray-500' },
     { name: 'MongoDB', icon: BiLogoMongodb, color: 'green-500' },
     { name: 'PostgreSQL', icon: BiLogoPostgresql, color: 'blue-600' },
+    { name: 'SQL'},
     { name: 'Server', icon: BiServer, color: 'red-500' },
     { name: 'Terminal', icon: BsTerminalFill, color: 'green-400' }
   ],
@@ -65,7 +69,8 @@ export const ICONS = {
     { name: 'NPM', icon: FaNpm, color: 'red-500' },
     { name: 'Git Branch', icon: BiGitBranch, color: 'red-400' },
     { name: 'Tasks', icon: BsKanban, color: 'blue-500' },
-    { name: 'Talend', icon: SiTalend, color: 'green-500' }
+    { name: 'Talend', icon: SiTalend, color: 'green-500' },
+    { name:'powerbi'}
   ],
   design: [
     { name: 'Figma', icon: FaFigma, color: 'purple-500' },
@@ -94,12 +99,22 @@ export const ICONS = {
     { name: 'Matplotlib', icon: VscGraph, color: 'orange-500' },
     { name: 'Scikit-Learn', icon: SiScikitlearn, color: 'orange-600' },
     { name: 'TensorFlow', icon: SiTensorflow, color: 'orange-500' },
-    { name: 'Jupyter', icon: SiJupyter, color: 'orange-600' }
+    { name: 'Jupyter', icon: SiJupyter, color: 'orange-600' },
+    { name: 'Data Analytics', icon: AiOutlineRadarChart, color: 'blue-600' },
+    { name: 'Data Mining', icon: VscProject, color: 'purple-500' }
   ],
   deeplearning: [
     { name: 'Keras', icon: SiKeras, color: 'red-500' },
     { name: 'PyTorch', icon: SiPytorch, color: 'orange-500' },
-    { name: 'TensorFlow', icon: SiTensorflow, color: 'orange-500' }
+    { name: 'TensorFlow', icon: SiTensorflow, color: 'orange-500' },
+    { name: 'Neural Networks', icon: HiChip, color: 'indigo-500' },
+    { name: 'Computer Vision', icon: AiFillExperiment, color: 'emerald-500' }
+  ],
+  nlp: [
+    { name: 'NLP', icon: AiFillMessage, color: 'green-600' },
+    { name: 'Sentiment Analysis', icon: VscSymbolClass, color: 'rose-500' },
+    { name: 'Text Classification', icon: HiBadgeCheck, color: 'amber-600' },
+    { name: 'Transformers', icon: AiFillRobot, color: 'indigo-600' }
   ],
   etl: [
     { name: 'Talend', icon: SiTalend, color: 'green-500' },
@@ -113,6 +128,7 @@ export const SKILL_CATEGORIES = [
   { value: 'backend', label: 'Backend Development' },
   { value: 'datascience', label: 'Data Science' },
   { value: 'deeplearning', label: 'Deep Learning' },
+  { value: 'nlp', label: 'Natural Language Processing' },
   { value: 'etl', label: 'ETL & Data Integration' },
   { value: 'tools', label: 'Development Tools' },
   { value: 'design', label: 'Design' },
@@ -123,7 +139,10 @@ export const PROJECT_CATEGORIES = [
   { value: 'frontend', label: 'Frontend' },
   { value: 'fullstack', label: 'Full Stack' },
   { value: 'mobile', label: 'Mobile Development' },
-  { value: 'api', label: 'API/Backend' }
+  { value: 'api', label: 'API/Backend' },
+  { value: 'data', label: 'Data Science' },
+  { value: 'ai', label: 'AI/ML' },
+  { value: 'nlp', label: 'NLP' }
 ];
 
 export const EMPLOYMENT_TYPES = [

@@ -41,7 +41,7 @@
   "home": {
     "hero": {
       "title": "Let's Create Your Digital Presence Together",
-      "subtitle": "Passionate Full Stack Developer and Data Analyst",
+      "subtitle": "Currently pursuing a Master's degree in Development, Big Data, and AI, I am determined to acquire new skills and take on challenging opportunities",
       "cta": {
         "contact": "Contact Me",
         "projects": "View Projects"
@@ -66,13 +66,13 @@
         },
         "ai": {
           "title": "AI / Machine Learning",
-          "description": "Development of intelligent models to automate processes"
+          "description": "Crafting intelligent AI solutions and autonomous agents"
         }
       }
     },
     "cta": {
       "title": "Looking for a motivated and passionate intern?",
-      "subtitle": "You've found the right person! Contact me to make your project a reality!",
+      "subtitle": "You've found the right person ( with my lunar power I will chase the bugs away) ! Contact me to make your project a reality!",
       "button": "Contact Me"
     }
   },
@@ -81,9 +81,9 @@
     "subtitle": "Discover a selection of my work",
     "categories": {
       "all": "All",
-      "frontend": "Frontend",
       "fullstack": "Full Stack",
-      "mobile": "Mobile"
+      "data analysis": "Data Analysis",
+      "AI/ML": "AI/ML"
     },
     "loading": "Loading projects...",
     "error": "Error loading projects:"
@@ -101,7 +101,7 @@
   },
   "about": {
     "title": "About Me",
-    "subtitle": "Passionate about web development for over 5 years, I create innovative digital solutions",
+    "subtitle": "Passionate about web development, I create innovative digital solutions",
     "technicalSkills": {
       "title": "Technical Skills",
       "loading": "Loading skills..."
@@ -113,9 +113,9 @@
         "description": "Passionate about Japanese culture and anime",
         "favorites": "Favorites"
       },
-      "philosophy": {
-        "title": "Philosophy",
-        "description": "Philosophy helps me develop critical thinking",
+      "Spirituality": {
+        "title": "Spirituality",
+        "description": "spirituality helps me connect to my inner self",
         "interests": "Interests"
       },
       "sport": {
@@ -212,32 +212,29 @@
         "interests": {
           "title": "Areas of Interest",
           "items": [
-            "Japanese animation",
-            "Japanese culture",
-            "Character design",
-            "Visual storytelling"
+            "Japanese animation and manga"
           ]
+          
         }
       },
-      "philosophy": {
-        "title": "Philosophy",
-        "description": "Philosophy helps me develop critical thinking",
+      "Spirituality": {
+        "title": "Spirituality",
+        "description": "spirituality helps me connect to my inner self",
         "interests": {
           "title": "Areas of Interest",
           "items": [
-            "Existentialism",
-            "Stoicism",
-            "Philosophy of Mind",
-            "Ethics"
+            "Crystals",
+            "Meditation",
+            "Astrology"
+            
           ]
         },
         "activities": {
           "title": "Activities",
           "items": [
-            "Reading philosophical works",
-            "Participating in debates",
-            "Writing reflections",
-            "Meditation"
+            "Reading AI articles",
+            "Sport",
+            "Jewelery creation"
           ]
         }
       },
@@ -247,10 +244,8 @@
         "activities": {
           "title": "Activities",
           "items": [
-            "Weight training",
-            "Running",
-            "Yoga",
-            "Team sports"
+            "Weight training"
+           
           ]
         },
         "goals": {

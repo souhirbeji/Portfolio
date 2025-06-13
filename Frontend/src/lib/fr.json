@@ -42,10 +42,10 @@
   "home": {
     "hero": {
       "title": "Créons ensemble votre présence numérique",
-      "subtitle": "Développeuse Full Stack et data analyste passionnée par les technologies innovantes",
+      "subtitle": "Actuellement en Master Développement, Big Data et IA, je suis déterminée à acquérir de nouvelles compétences et à relever des défis stimulants",
       "cta": {
         "contact": "Me Contacter",
-        "projects": "Voir mes Projets"
+        "projects": "mes Projets"
       }
     },
     "featuredProjects": {
@@ -72,8 +72,8 @@
       }
     },
     "cta": {
-      "title": "Vous cherchez un stagiaire motivé et passionné ?",
-      "subtitle": "Vous avez trouvé la bonne personne ! Contactez-moi pour concrétiser votre projet !",
+      "title": "Vous cherchez une stagiaire motivée et passionnée ?",
+      "subtitle": "Vous avez trouvé la bonne personne ( avec mon pouvoir lunaire) ! Contactez-moi pour concrétiser votre projet !",
       "button": "Contactez-moi"
     }
   },
@@ -82,15 +82,15 @@
     "subtitle": "Découvrez une sélection de mes réalisations",
     "categories": {
       "all": "Tous",
-      "frontend": "Frontend",
       "fullstack": "Full Stack",
-      "mobile": "Mobile"
+      "data analysis": "Data Analyse",
+      "AI/ML": "AI/ML"
     },
     "loading": "Chargement des projets en cours...",
     "error": "Une erreur est survenue lors du chargement des projets"
   },
   "footer": {
-    "description": "Développeuse Full Stack et data analyste passionnée par les technologies innovantes",
+    "description": "Développeuse Full Stack et data analyst passionnée en quéte d'apprentissage et de défis.",
     "quickLinks": "Liens Rapides",
     "followMe": "Me Suivre",
     "rights": "Tous droits réservés",
@@ -111,12 +111,12 @@
       "title": "Mes Passions",
       "anime": {
         "title": "Anime & Manga",
-        "description": "Passionné par la culture japonaise et les animes",
+        "description": "Sailor moon",
         "favorites": "Favoris"
       },
-      "philosophy": {
-        "title": "Philosophie",
-        "description": "La philosophie m'aide à développer un esprit critique",
+      "Spirituality": {
+        "title": "Spiritualité ",
+        "description": "La spiritualité est le langage du cœur, elle nous permet de communiquer avec l'univers et avec nous-mêmes",
         "interests": "Centres d'intérêt"
       },
       "sport": {
@@ -209,49 +209,42 @@
         "title": "Anime & Manga",
         "description": "Passionné par la culture japonaise et les animes",
         "favorites": "Mes favoris",
-        "quote": "Le voyage est plus important que la destination",
+        "quote": "True strength is not found in the power of your abilities, but in the power of your will.” -Sung Jin-Woo",
         "interests": {
           "title": "Centres d'intérêt",
           "items": [
-            "Animation japonaise",
-            "Culture japonaise",
-            "Character design",
-            "Narration visuelle"
+            "Animation et manga"
+           
           ]
         }
       },
-      "philosophy": {
-        "title": "Philosophie",
-        "description": "La philosophie m'aide à développer un esprit critique",
+      "Spirituality": {
+        "title": "Spiritualité ",
+        "description": "La spiritualité est le langage du cœur, elle nous permet de communiquer avec l'univers et avec nous-mêmes",
         "interests": {
           "title": "Centres d'intérêt",
           "items": [
-            "Existentialisme",
-            "Stoïcisme",
-            "Philosophie de l'esprit",
-            "Éthique"
+            "Crystals",
+            "Meditation",
+            "Astrologie"
           ]
         },
         "activities": {
           "title": "Activités",
           "items": [
-            "Lecture d'ouvrages philosophiques",
-            "Participation à des débats",
-            "Rédaction de réflexions",
-            "Méditation"
+            "Lecture des articles IA",
+            "Sport",
+            "Creation des bijoux"
           ]
         }
       },
       "sport": {
         "title": "Sport",
-        "description": "Le sport est essentiel pour maintenir un équilibre",
+        "description": "Le sport m'aide a me deconnecter et à me ressourcer",
         "activities": {
           "title": "Activités",
           "items": [
-            "Musculation",
-            "Course à pied",
-            "Yoga",
-            "Sports collectifs"
+            "Musculation"
           ]
         },
         "goals": {
