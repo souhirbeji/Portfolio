@@ -40,8 +40,8 @@
   },
   "home": {
     "hero": {
-      "title": "Let's Create Your Digital Presence Together",
-      "subtitle": "Currently pursuing a Master's degree in Development, Big Data, and AI, I am determined to acquire new skills and take on challenging opportunities",
+      "title": "Explore my portfolio of Dev AI & Big Data projects ",
+      "subtitle": "Detail-oriented and pragmatic, I adapt quickly and enjoy teamwork. I am seeking an apprenticeship starting September 2025",
       "cta": {
         "contact": "Contact Me",
         "projects": "View Projects"
@@ -52,8 +52,8 @@
       "subtitle": "Discover some of my recent work",
       "viewMore": "Learn More"
     },
-    "services": {
-      "title": "My Services",
+    "skills": {
+      "title": "Skills",
       "subtitle": "Solutions tailored to your needs",
       "items": {
         "webdev": {
@@ -72,7 +72,6 @@
     },
     "cta": {
       "title": "Looking for a motivated and passionate intern?",
-      "subtitle": "You've found the right person ( with my lunar power I will chase the bugs away) ! Contact me to make your project a reality!",
       "button": "Contact Me"
     }
   },
@@ -89,7 +88,7 @@
     "error": "Error loading projects:"
   },
   "footer": {
-    "description": "Passionate Full Stack Developer and Data Analyst",
+    "description": "Master’s student in Development, Big Data, and AI ✨ | Passionate about Data Analysis and AI ❣️ | Seeking an Apprenticeship for September 2025 🚀",
     "quickLinks": "Quick Links",
     "followMe": "Follow Me",
     "rights": "All rights reserved",

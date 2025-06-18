@@ -18,24 +18,24 @@ const Home = () => {
     dispatch(incrementViewCount());
   }, [dispatch]);
 
-  const services = [
+  const skills = [
     {
       icon: <FaCode className="text-4xl text-violet-500" />,
-      title: t('home.services.items.webdev.title'),
+      title: t('home.skills.items.webdev.title'),
       type: 'webdev',
-      description: t('home.services.items.webdev.description')
+      description: t('home.skills.items.webdev.description')
     },
     {
-      icon: <FaChartBar className="text-4xl text-teal-500" />,  
-      title: t('home.services.items.dataAnalysis.title'),
+      icon: <FaChartBar className="text-4xl text-teal-500" />,
+      title: t('home.skills.items.dataAnalysis.title'),
       type: 'dataAnalysis',
-      description: t('home.services.items.dataAnalysis.description')
+      description: t('home.skills.items.dataAnalysis.description')
     },
     {
-      icon: <FaBrain className="text-4xl text-purple-500" />,  
-      title: t('home.services.items.ai.title'),
+      icon: <FaBrain className="text-4xl text-purple-500" />,
+      title: t('home.skills.items.ai.title'),
       type: 'ai',
-      description: t('home.services.items.ai.description')
+      description: t('home.skills.items.ai.description')
     }
   ];
 
@@ -213,7 +213,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Services Section */}
+      {/* Skills Section */}
       <section className="py-20">
         <div className="container mx-auto px-6">
           <motion.div
@@ -223,15 +223,15 @@ const Home = () => {
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-violet-500 via-teal-500 to-blue-500 bg-clip-text text-transparent">
-              {t('home.services.title')}
+              {t('home.skills.title')}
             </h2>
             <p className="text-gray-600">
-              {t('home.services.subtitle')}
+              {t('home.skills.subtitle')}
             </p>
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {services.map((service, index) => {
+            {skills.map((service, index) => {
               const theme = themes[index % themes.length];
               return (
                 <motion.div
@@ -250,10 +250,10 @@ const Home = () => {
                       {service.icon}
                     </div>
                     <h3 className="text-xl font-bold mb-2">
-                      {t(`home.services.items.${service.type}.title`)}
+                      {t(`home.skills.items.${service.type}.title`)}
                     </h3>
                     <p className="text-gray-600">
-                      {t(`home.services.items.${service.type}.description`)}
+                      {t(`home.skills.items.${service.type}.description`)}
                     </p>
                   </div>
                 </motion.div>
@@ -276,7 +276,6 @@ const Home = () => {
               {t('home.cta.title')}
             </h2>
             <p className="text-white/90 mb-8">
-              {t('home.cta.subtitle')}
             </p>
             <Link
               to="/contact"

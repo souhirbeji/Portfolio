@@ -41,11 +41,11 @@
   },
   "home": {
     "hero": {
-      "title": "Créons ensemble votre présence numérique",
-      "subtitle": "Actuellement en Master Développement, Big Data et IA, je suis déterminée à acquérir de nouvelles compétences et à relever des défis stimulants",
+      "title": "Découvrez mon portfolio de projet Dev IA & Big Data ",
+      "subtitle": "Rigoureuse et pragmatique, je m’adapte rapidement et j’aime travailler en équipe. Je suis à la recherche d’une alternance à partir de septembre 2025",
       "cta": {
         "contact": "Me Contacter",
-        "projects": "mes Projets"
+        "projects": "Mes Projets"
       }
     },
     "featuredProjects": {
@@ -53,8 +53,8 @@
       "subtitle": "Découvrez quelques-unes de mes réalisations récentes",
       "viewMore": "En savoir plus"
     },
-    "services": {
-      "title": "Mes Services",
+    "skills": {
+      "title": "Mes compétences",
       "subtitle": "Des solutions adaptées à vos besoins",
       "items": {
         "webdev": {
@@ -72,8 +72,7 @@
       }
     },
     "cta": {
-      "title": "Vous cherchez une stagiaire motivée et passionnée ?",
-      "subtitle": "Vous avez trouvé la bonne personne ( avec mon pouvoir lunaire) ! Contactez-moi pour concrétiser votre projet !",
+      "title": "Are you looking for a curious and determined apprentice eager to learn alongside your team ?",
       "button": "Contactez-moi"
     }
   },
@@ -90,7 +89,7 @@
     "error": "Une erreur est survenue lors du chargement des projets"
   },
   "footer": {
-    "description": "Développeuse Full Stack et data analyst passionnée en quéte d'apprentissage et de défis.",
+    "description": "Etudiante en Master Dev, Big Data et IA ✨ | Passionnée par la Data analyse et l'IA ❣️ | A la recherche d'une Alternance pour Sept-2025 🚀",
     "quickLinks": "Liens Rapides",
     "followMe": "Me Suivre",
     "rights": "Tous droits réservés",
@@ -133,7 +132,7 @@
   },
   "contact": {
     "title": "Contactez-moi",
-    "subtitle": "Vous avez un projet en tête ? Je serais ravi d'en discuter avec vous",
+    "subtitle": "Mon profil vous intéresse, écrivez-moi, j'ai hâte de vous parler! ",
     "form": {
       "name": "Nom",
       "email": "Email",
